@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:56:44 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/05 17:11:37 by qtay             ###   ########.fr       */
+/*   Updated: 2024/11/05 17:21:43 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ int	dup_cub_file(char *file_path, t_cubfile *file_info)
 		return (err_msg("Malloc failure"), FAILURE);
 	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
+	{
+		free_double_arr((void **)file_info->cub_file);
 		return (printf("Error opening file: %s\n", strerror(errno)));
+	}
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -59,6 +62,9 @@ int	dup_cub_file(char *file_path, t_cubfile *file_info)
 		line = get_next_line(fd);
 	}
 	if (close(fd) == -1)
+	{
+		free_double_arr((void **)file_info->cub_file);
 		return (printf("Error closing file: %s\n", strerror(errno)));
+	}
 	return (SUCCESS);
 }

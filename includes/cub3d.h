@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/05 17:14:49 by qtay             ###   ########.fr       */
+/*   Updated: 2024/11/05 17:20:44 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,9 @@ typedef struct s_data
 	t_ray		ray;
 }	t_data;
 
+/* UTILIZATION */
 void	err_msg(char *msg);
+void	free_double_arr(void **double_arr);
 
 /* INITIALIZATION */
 void	init_data(t_data *data);
