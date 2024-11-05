@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:52:16 by qtay              #+#    #+#             */
-/*   Updated: 2024/09/22 14:19:47 by xquah            ###   ########.fr       */
+/*   Updated: 2024/11/05 13:33:42 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 typedef struct s_list
 {
@@ -64,8 +68,8 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 int		ft_strcmp(char *s1, char *s2);
 
-	/* Bonus functions */
-	t_list *ft_lstnew(void *content);
+/* Bonus functions */
+t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstadd_front(t_list **alst, t_list *new);
@@ -77,5 +81,9 @@ int		ft_lstsize(t_list *lst);
 
 /* Useful functions */
 int		ft_strspn(const char *str, const char *accept);
+char	*ft_strtok(char *str, const char *delim);
+
+/* Get next line */
+char	*get_next_line(int fd);
 
 #endif
