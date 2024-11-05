@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/05 16:48:49 by qtay             ###   ########.fr       */
+/*   Updated: 2024/11/05 17:00:47 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ typedef struct s_data
 }	t_data;
 
 void	err_msg(char *msg);
+int		check_file(char *file_path);
 
 #endif
