@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/06 16:39:11 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/05 17:06:54 by qtay             ###   ########.fr       */
+/*   Created: 2024/10/07 21:54:52 by qtay              #+#    #+#             */
+/*   Updated: 2024/11/05 17:04:39 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	main(int ac, char **av)
+int	copy_cub_file(char *file_path, t_data *data)
 {
-	t_data	data;
+	t_cubfile	*file_info;
 
-	if (ac != 2)
-		return (err_msg("Invalid num of arguments!"), EXIT_FAILURE);
-	init_data(&data);
-	if (check_file(av[1]) == FAILURE)
-		return (EXIT_FAILURE);
-	if (get_file(av[1], &data) == FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	file_info = &data->file_info;
+	if (get_file_rows(file_path, file_info))
+		return (FAILURE);
+	if (dup_cub_file(file_path, file_info))
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int	get_file(char *file_path, t_data *data)
+{
+	if (copy_cub_file(file_path, data) == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
 }
