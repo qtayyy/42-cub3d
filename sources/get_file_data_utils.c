@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:56:44 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/05 17:21:43 by qtay             ###   ########.fr       */
+/*   Updated: 2024/11/06 09:42:19 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,23 @@ int	dup_cub_file(char *file_path, t_cubfile *file_info)
 		return (printf("Error closing file: %s\n", strerror(errno)));
 	}
 	return (SUCCESS);
+}
+
+static void	dup_dir_texture(char *line,	char **tex_dir)
+{
+	while (*line == '\t' || *line == ' ')
+		line++;
+	*tex_dir = ft_strdup(ft_strtrim(line, " \n"));
+}
+
+void	extract_dir_textures(char *line, t_textures *tex_info)
+{
+	if (ft_strncmp(line, "NO", 2) == 0)
+		dup_dir_texture(line + 2, &tex_info->north);
+	else if (ft_strncmp(line, "SO", 2) == 0)
+		dup_dir_texture(line + 2, &tex_info->south);
+	else if (ft_strncmp(line, "EA", 2) == 0)
+		dup_dir_texture(line + 2, &tex_info->east);
+	else if (ft_strncmp(line, "WE", 2) == 0)
+		dup_dir_texture(line + 2, &tex_info->west);
 }
