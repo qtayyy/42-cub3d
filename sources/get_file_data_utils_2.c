@@ -6,11 +6,56 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:14:51 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/06 14:28:10 by qtay             ###   ########.fr       */
+/*   Updated: 2024/11/06 14:40:24 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+char	*dup_map(char *line)
+{
+	char	*buffer;
+	int		i;
+	int		j;
+
+	buffer = ft_calloc(ft_strlen(line) + 1, sizeof(char));
+	if (buffer == NULL)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ' || line[i] == '\t')
+			buffer[j] = '1';
+		else if (line[i] == '\n')
+			break ;
+		else
+			buffer[j] = line[i];
+		i++;
+		j++;
+	}
+	return (buffer);
+}
+
+int	count_map_rows(char **cub_file)
+{
+	int	i;
+	int	j;
+	int	map_rows;
+
+	i = 0;
+	map_rows = 0;
+	while (cub_file[i])
+	{
+		j = 0;
+		while (cub_file[i][j] == ' ' || cub_file[i][j] == '\t')
+			j++;
+		if (ft_isdigit(cub_file[i][j]))
+			map_rows++;
+		i++;
+	}
+	return (map_rows);
+}
 
 static int	count_num_delims(char *line, int delim)
 {

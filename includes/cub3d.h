@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/05 17:20:44 by qtay             ###   ########.fr       */
+/*   Updated: 2024/11/06 14:40:43 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,9 @@ int		check_file(char *file_path);
 int		get_file(char *file_path, t_data *data);
 int		get_file_rows(char *file_path, t_cubfile *file_info);
 int		dup_cub_file(char *file_path, t_cubfile *file_info);
-
+int		get_textures(t_data *data);
+void	extract_dir_textures(char *line, t_textures *tex_info);
+void	extract_color_textures(char *line, t_textures *tex_info);
+int		count_map_rows(char **cub_file);
+char	*dup_map(char *line);
 #endif
