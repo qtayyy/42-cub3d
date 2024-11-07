@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:39:11 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/05 17:06:54 by qtay             ###   ########.fr       */
+/*   Updated: 2024/11/06 16:00:11 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	main(int ac, char **av)
 	if (check_file(av[1]) == FAILURE)
 		return (EXIT_FAILURE);
 	if (get_file(av[1], &data) == FAILURE)
+		return (EXIT_FAILURE);
+	if (check_map(&data) == FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
