@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:21:21 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/06 16:01:54 by qtay             ###   ########.fr       */
+/*   Updated: 2024/11/07 12:31:09 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,48 @@ int	check_num_players(char **map)
 	return (SUCCESS);
 }
 
+int	check_map_elements(t_data *data)
+{
+	int		i;
+	int		j;
+	char	**map;
+
+	map = data->map;
+	i = -1;
+	while (map[++i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_strchr("01NSEW", map[i][j]) == NULL)
+				return (FAILURE);
+			else if (ft_strchr("NSEW", map[i][j])) // might not be necessary
+			{
+				data->player.dir = map[i][j];
+				data->map[i][j] = '0';
+				data->player.pos_x = (double)j + 0.5;
+				data->player.pos_y = (double)i + 0.5;
+			}
+			j++;
+		}
+	}
+	return (SUCCESS);
+}
+
+int	check_textures(t_textures *tex_info)
+{
+	if (!tex_info->north || !tex_info->south || !tex_info->east || !tex_info->west)
+		return (err_msg("Direction texture missing"), FAILURE);
+	if (check_file_open(tex_info->north) || check_file_open(tex_info->south)
+		|| check_file_open(tex_info->east) || check_file_open(tex_info->west))
+		return (FAILURE);
+	if (check_rgb(tex_info->floor) || check_rgb(tex_info->ceiling))
+		return (FAILURE);
+	tex_info->hex_floor = convert_rgb_hex(tex_info->floor);
+	tex_info->hex_ceiling = convert_rgb_hex(tex_info->ceiling);
+	return (SUCCESS);
+}
+
 int	check_map(t_data *data)
 {
 	if (data->map_rows < 3)
@@ -70,5 +112,9 @@ int	check_map(t_data *data)
 		return (err_msg("Map is not closed by walls!"), FAILURE);
 	if (check_num_players(data->map) == FAILURE)
 		return (err_msg("This is a single player game"), FAILURE);
+	if (check_map_elements(data) == FAILURE)
+		return (err_msg("Map should only contain 0, 1 and one of NSEW"), FAILURE);
+	if (check_textures(&data->tex_info) == FAILURE)
+		return (FAILURE);
 	return (SUCCESS);
 }
