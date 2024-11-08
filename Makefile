@@ -17,6 +17,8 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 SRC_PATH = ./sources/
 SRC		= 	main.c \
 			init.c \
+			init_2.c \
+			check_validity.c \
 			check_validity_utils.c \
 			get_file_data.c \
 			get_file_data_utils.c \
