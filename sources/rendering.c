@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:00 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/08 23:21:57 by qtay             ###   ########.fr       */
+/*   Updated: 2024/11/10 10:21:19 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	render_raycast(t_data *data)
 {
 	init_screen_pixels(data);
 	init_ray(&data->ray);
+	raycasting(data, &data->player);
 }
