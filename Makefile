@@ -22,7 +22,8 @@ SRC		= 	main.c \
 			check_validity_utils.c \
 			get_file_data.c \
 			get_file_data_utils.c \
-			get_file_data_utils_2.c
+			get_file_data_utils_2.c \
+			rendering.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 
