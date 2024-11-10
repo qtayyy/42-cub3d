@@ -23,7 +23,9 @@ SRC		= 	main.c \
 			get_file_data.c \
 			get_file_data_utils.c \
 			get_file_data_utils_2.c \
-			rendering.c
+			rendering.c \
+			raycasting.c \
+			raycasting_utils.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 
