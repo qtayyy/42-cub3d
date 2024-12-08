@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/06 14:40:43 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/03 16:26:37 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,20 +122,35 @@ typedef struct s_data
 }	t_data;
 
 /* UTILIZATION */
-void	err_msg(char *msg);
-void	free_double_arr(void **double_arr);
+void			err_msg(char *msg);
+void			free_double_arr(void **double_arr);
 
 /* INITIALIZATION */
-void	init_data(t_data *data);
+void			init_data(t_data *data);
+void			init_ray(t_ray *ray);
+void			init_player_dir(t_player *player);
+void			init_mlx(t_data *data);
+void			load_texture_img(t_data *data);
 
 /* PARSING */
-int		check_file(char *file_path);
-int		get_file(char *file_path, t_data *data);
-int		get_file_rows(char *file_path, t_cubfile *file_info);
-int		dup_cub_file(char *file_path, t_cubfile *file_info);
-int		get_textures(t_data *data);
-void	extract_dir_textures(char *line, t_textures *tex_info);
-void	extract_color_textures(char *line, t_textures *tex_info);
-int		count_map_rows(char **cub_file);
-char	*dup_map(char *line);
+int				check_file(char *file_path);
+int				get_file(char *file_path, t_data *data);
+int				get_file_rows(char *file_path, t_cubfile *file_info);
+int				dup_cub_file(char *file_path, t_cubfile *file_info);
+int				get_textures(t_data *data);
+void			extract_dir_textures(char *line, t_textures *tex_info);
+void			extract_color_textures(char *line, t_textures *tex_info);
+int				count_map_rows(char **cub_file);
+char			*dup_map(char *line);
+int				check_map(t_data *data);
+int				check_file_open(char *file_path);
+int				check_rgb(int *rgb);
+unsigned long	convert_rgb_hex(int *rgb);
+
+/* RAYCASTING */
+void			render_raycast(t_data *data);
+void			raycasting(t_data *data, t_player *player);
+void			init_raycasting(int x, t_ray *ray, t_player *player);
+void			init_dda_algo(t_ray *ray, t_player *player);
+
 #endif
