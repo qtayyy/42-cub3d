@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/03 16:26:37 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/09 13:55:46 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define VERTICAL 0
 # define HORIZONTAL 1
 
-# define WIN_HEIGHT 480
-# define WIN_WIDTH 640
+# define WIN_HEIGHT 900
+# define WIN_WIDTH 1280
 # define TEXTURE_SIZE 64
 
 enum e_texture_index

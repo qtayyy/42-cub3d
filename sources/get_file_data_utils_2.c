@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:14:51 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/06 14:40:24 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/09 13:18:44 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ char	*dup_map(char *line)
 	j = 0;
 	while (line[i])
 	{
-		if (line[i] == ' ' || line[i] == '\t')
-			buffer[j] = '1';
-		else if (line[i] == '\n')
+		// if (line[i] == ' ' || line[i] == '\t')
+		// 	buffer[j] = '1';
+		if (line[i] == '\n')
 			break ;
 		else
 			buffer[j] = line[i];
