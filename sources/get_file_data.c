@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:54:52 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/06 14:38:48 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/09 13:31:39 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ int	get_textures(t_data *data)
 	return (SUCCESS);
 }
 
+/**
+ * Probably can check if nothing comes after the map here
+ */
 int	get_map(t_data *data)
 {
 	int		i;

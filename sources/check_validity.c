@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:21:21 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/07 12:31:09 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/09 13:23:49 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	check_map_closed(char **map, int rows)
 
 	i = 0;
 	prev = ft_strlen(map[0]);
-	if (ft_strspn(map[0], "1") != prev
-		|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows - 1]))
-		return (FAILURE);
+	// if (ft_strspn(map[0], "1") != prev
+	// 	|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows - 1]))
+	// 	return (FAILURE);
 	while (++i < rows - 1)
 	{
 		cur = ft_strlen(map[i]);
-		if (map[i][0] != '1' || map[i][cur - 1] != '1')
-			return (FAILURE);
+		// if (map[i][0] != '1' || map[i][cur - 1] != '1')
+		// 	return (FAILURE);
 		if (cur > prev
 			&& ft_strspn(map[i] + prev - 1, "1") != cur - prev + 1)
 			return (FAILURE);
@@ -94,6 +94,7 @@ int	check_textures(t_textures *tex_info)
 {
 	if (!tex_info->north || !tex_info->south || !tex_info->east || !tex_info->west)
 		return (err_msg("Direction texture missing"), FAILURE);
+	// check whether texture files end with .xpm
 	if (check_file_open(tex_info->north) || check_file_open(tex_info->south)
 		|| check_file_open(tex_info->east) || check_file_open(tex_info->west))
 		return (FAILURE);
@@ -108,6 +109,8 @@ int	check_map(t_data *data)
 {
 	if (data->map_rows < 3)
 		return (err_msg("Map must contain at least 3 rows"), FAILURE);
+	// flood fill check space
+	// replace spaces in the map with 1 (get_file -> get_map -> dup_map)
 	if (check_map_closed(data->map, data->map_rows) == FAILURE)
 		return (err_msg("Map is not closed by walls!"), FAILURE);
 	if (check_num_players(data->map) == FAILURE)
