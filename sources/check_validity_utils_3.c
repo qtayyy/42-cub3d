@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:12:09 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/09 17:19:23 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/09 17:36:25 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	scan_map(char **map, int height)
 		{
 			if (map[i][j] == 'X')
 			{
-				// printf("map[%d][%d] = %c\n", i, j, map[i][j]);
 				if (check_surrounding(map, i, j, height) == FAILURE)
 					return (FAILURE);
 			}

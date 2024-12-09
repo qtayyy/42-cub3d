@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:49:26 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/09 17:21:59 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/09 17:38:42 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	check_enclosed_space(char **map, int rows)
 		free_double_arr((void **)temp_map);
 		return (FAILURE);
 	}
+	free_double_arr((void **)temp_map);
 	return (SUCCESS);
 }
 
