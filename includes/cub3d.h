@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/09 14:37:16 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/09 17:17:46 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 
 # define SUCCESS 0
 # define FAILURE 1
+
+# define TRUE 0
+# define FALSE 1
 
 # define VERTICAL 0
 # define HORIZONTAL 1
@@ -124,6 +127,7 @@ typedef struct s_data
 /* UTILIZATION */
 void			err_msg(char *msg);
 void			free_double_arr(void **double_arr);
+void			print_map(char **map);
 
 /* INITIALIZATION */
 void			init_data(t_data *data);
@@ -143,6 +147,14 @@ void			extract_color_textures(char *line, t_textures *tex_info);
 int				count_map_rows(char **cub_file);
 char			*dup_map(char *line);
 int				check_map(t_data *data);
+int				check_enclosed_space(char **map, int rows);
+char			**duplicate_map(char **map, int rows);
+int				flood_fill(char **map, int height);
+void			flood_fill_recursive(char **map, int i, int j, int height);
+int				scan_map(char **map, int height);
+int				check_surrounding(char **map, int i, int j, int max_h);
+void			replace_space_to_1(char **map, int rows);
+int				is_0_or_player(char c);
 int				check_file_open(char *file_path);
 int				check_texture_ext(t_textures *tex_info);
 int				check_rgb(int *rgb);

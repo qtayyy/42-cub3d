@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:39:11 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/10 10:27:46 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/09 15:09:31 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	if (check_map(&data) == FAILURE)
 		return (EXIT_FAILURE);
-	init_player_dir(&data.player);
-	init_mlx(&data);
-	load_texture_img(&data);
-	render_raycast(&data);
-	mlx_loop(data.mlx);
+	// init_player_dir(&data.player);
+	// init_mlx(&data);
+	// load_texture_img(&data);
+	// render_raycast(&data);
+	// mlx_loop(data.mlx);
 	return (EXIT_SUCCESS);
 }
