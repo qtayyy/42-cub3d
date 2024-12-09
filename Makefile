@@ -99,4 +99,12 @@ fclean: clean
 
 re: fclean all
 
+norm:
+	@ echo $(YELLOW)"Checking Norminette..."$(RESET)
+	@ norminette $(SRCS) ./includes/*.h
+
+play: all
+	@ echo $(GREEN)"Playing Cub3D..."$(RESET)"|"$(MAGENTA)" Map : sponge.cub"$(RESET)
+	@ ./$(NAME) maps/sponge.cub
+
 .PHONY: all re clean fclean bonus

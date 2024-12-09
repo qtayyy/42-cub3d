@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_validity.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:21:21 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/09 13:23:49 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/09 14:43:37 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ int	check_textures(t_textures *tex_info)
 {
 	if (!tex_info->north || !tex_info->south || !tex_info->east || !tex_info->west)
 		return (err_msg("Direction texture missing"), FAILURE);
-	// check whether texture files end with .xpm
+	if (check_texture_ext(tex_info) == FAILURE)
+		return (FAILURE);
 	if (check_file_open(tex_info->north) || check_file_open(tex_info->south)
 		|| check_file_open(tex_info->east) || check_file_open(tex_info->west))
 		return (FAILURE);
