@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/09 13:55:46 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/09 14:37:16 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ int				count_map_rows(char **cub_file);
 char			*dup_map(char *line);
 int				check_map(t_data *data);
 int				check_file_open(char *file_path);
+int				check_texture_ext(t_textures *tex_info);
 int				check_rgb(int *rgb);
 unsigned long	convert_rgb_hex(int *rgb);
 

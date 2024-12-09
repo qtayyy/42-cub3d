@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_validity_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:40:36 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/07 12:32:21 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/09 14:33:31 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,14 @@ unsigned long	convert_rgb_hex(int *rgb)
 	b = rgb[2];
 	ret = ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
 	return (ret);
+}
+
+int	check_texture_ext(t_textures *tex_info)
+{
+	if (ft_strncmp(tex_info->north + ft_strlen(tex_info->north) - 4, ".xpm", 4) != 0
+		|| ft_strncmp(tex_info->south + ft_strlen(tex_info->south) - 4, ".xpm", 4) != 0
+		|| ft_strncmp(tex_info->east + ft_strlen(tex_info->east) - 4, ".xpm", 4) != 0
+		|| ft_strncmp(tex_info->west + ft_strlen(tex_info->west) - 4, ".xpm", 4) != 0)
+		return (err_msg("Texture files must end with .xpm"), FAILURE);
+	return (SUCCESS);
 }
