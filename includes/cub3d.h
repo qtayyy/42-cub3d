@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/09 17:17:46 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/09 18:51:50 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_cubfile
 {
 	int		file_rows;
 	int		file_max_columns;
+	int		map_end_row;
 	char	**cub_file;
 }	t_cubfile;
 
@@ -145,8 +146,9 @@ int				get_textures(t_data *data);
 void			extract_dir_textures(char *line, t_textures *tex_info);
 void			extract_color_textures(char *line, t_textures *tex_info);
 int				count_map_rows(char **cub_file);
-char			*dup_map(char *line);
+char			*dup_map(char *line, int *map_end_row);
 int				check_map(t_data *data);
+int				check_post_map(t_data *data);
 int				check_enclosed_space(char **map, int rows);
 char			**duplicate_map(char **map, int rows);
 int				flood_fill(char **map, int height);

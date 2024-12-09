@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data_utils_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:14:51 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/09 13:18:44 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/09 18:47:26 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char	*dup_map(char *line)
+char	*dup_map(char *line, int *map_end_row)
 {
 	char	*buffer;
 	int		i;
 	int		j;
 
+	(*map_end_row)++;
 	buffer = ft_calloc(ft_strlen(line) + 1, sizeof(char));
 	if (buffer == NULL)
 		return (NULL);

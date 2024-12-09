@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 23:19:34 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/05 13:47:47 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/09 18:42:20 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	init_file_info(t_cubfile *file_info)
 {
 	file_info->file_rows = 0;
 	file_info->file_max_columns = 0;
+	file_info->map_end_row = 0;
 	file_info->cub_file = NULL;
 }
 
