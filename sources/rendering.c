@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:00 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/10 10:27:15 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/09 09:25:01 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_screen_pixels(t_data *data)
 	}
 	while (++i < WIN_HEIGHT)
 	{
-		data->screen_pixels[i] = ft_calloc(WIN_WIDTH + 1, sizeof(int *));
+		data->screen_pixels[i] = ft_calloc(WIN_WIDTH + 1, sizeof(int));
 		if (data->screen_pixels[i] == NULL)
 		{
 			printf("screen pixel[%d] init fail\n", i);
