@@ -94,26 +94,29 @@ int	check_post_map(t_data *data)
 	char	**temp_cubfile;
 	char	*line;
 	int		i;
-	int		in_map;
 
 	temp_cubfile = data->file_info.cub_file;
 	line = *temp_cubfile;
 	i = 0;
-	in_map = 0;
 	while (line)
 	{
 		printf("line: %s\n", line);
 		while (line[i] == '\t' || line[i] == ' ')
 			i++;
-		if (ft_isdigit(line[i]) && ft_strncmp(line[i], data->map[0] == 0, ft_strlen(data->map[0])) == 0)
+		if (ft_isdigit(line[i]) && ft_strncmp(line, data->map[0], ft_strlen(data->map[0])) == 0)
 		{
-			in_map = 1;
 			temp_cubfile += data->file_info.map_end_row;
-			printf("line: %s\n", *temp_cubfile);
+			if (*temp_cubfile == NULL)
+				break ;
+			line = *temp_cubfile;
+			if (line != NULL && line[i] != '\0' && line[i] != '\n')
+				return (FAILURE);
 		}
 		else
+		{
 			temp_cubfile++;
-		line = *temp_cubfile;
+			line = *temp_cubfile;
+		}
 	}
 	return (SUCCESS);
 }

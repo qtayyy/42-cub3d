@@ -20,6 +20,7 @@ CFLAGS	= -Werror -Wextra -Wall #-g3 -fsanitize=address #-Werror -Wextra -Wall
 MLX_PATH	= minilibx-linux/
 MLX_NAME	= libmlx.a
 MLX			= $(MLX_PATH)$(MLX_NAME)
+MLX_FLAGS	= -L $(MLX_PATH) -lmlx -lXext -lX11 -lm
 
 #---------Libft----------#
 LIBFT_PATH	= libft/
