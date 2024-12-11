@@ -84,5 +84,40 @@ int	get_file(char *file_path, t_data *data)
 		return (err_msg("Texture error"), FAILURE); // change error msg
 	if (get_map(data) == FAILURE)
 		return (err_msg("Map Eeror"), FAILURE);
+	if (check_post_map(data) == FAILURE)
+		return (err_msg("Unexpected content below map"), FAILURE);
+	return (SUCCESS);
+}
+
+int	check_post_map(t_data *data)
+{
+	char	**temp_cubfile;
+	char	*line;
+	int		i;
+
+	temp_cubfile = data->file_info.cub_file;
+	line = *temp_cubfile;
+	i = 0;
+	while (line)
+	{
+		printf("line: %s\n", line);
+		while (line[i] == '\t' || line[i] == ' ')
+			i++;
+		if (ft_isdigit(line[i]) && ft_strncmp(line, data->map[0], ft_strlen(data->map[0])) == 0)
+		{
+			temp_cubfile += data->map_rows - 1;
+			printf("temp_cubfile: %s\n", *temp_cubfile);
+			if (*temp_cubfile == NULL)
+				break ;
+			line = *temp_cubfile;
+			if (line != NULL && line[i] != '\0' && line[i] != '\n')
+				return (FAILURE);
+		}
+		else
+		{
+			temp_cubfile++;
+			line = *temp_cubfile;
+		}
+	}
 	return (SUCCESS);
 }

@@ -145,6 +145,7 @@ char			*dup_map(char *line);
 int				check_map(t_data *data);
 int				check_file_open(char *file_path);
 int				check_texture_ext(t_textures *tex_info);
+int				check_post_map(t_data *data);
 int				check_rgb(int *rgb);
 unsigned long	convert_rgb_hex(int *rgb);
 
