@@ -51,6 +51,9 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 #--------Includes--------#
 INC			=	-I ./includes/ -I ./libft/ -I ./minilibx-linux/
 
+#--------Dos2Unix--------#
+DOS2UNIX_FOLDERS = ./includes ./libft ./maps ./minilibx-linux ./sources ./textures
+
 #--------Main rule---------#
 all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
 
@@ -107,4 +110,22 @@ play: all
 	@ echo $(GREEN)"Playing Cub3D..."$(RESET)"|"$(MAGENTA)" Map : sponge.cub"$(RESET)
 	@ ./$(NAME) maps/sponge.cub
 
-.PHONY: all re clean fclean bonus
+check-dos2unix:
+	@ command -v dos2unix >/dev/null 2>&1 && { \
+		echo "dos2unix is found"; \
+	} || { \
+		echo "dos2unix not found. Installing..."; \
+		sudo apt update && sudo apt install -y dos2unix; \
+	}
+
+dos2unix: check-dos2unix
+	@ for folder in $(DOS2UNIX_FOLDERS); do \
+		find $$folder -type f -exec dos2unix {} \;; \
+	done
+
+unix2dos: check-dos2unix
+	@ for folder in $(DOS2UNIX_FOLDERS); do \
+		find $$folder -type f -exec unix2dos {} \;; \
+	done
+
+.PHONY: all re clean fclean bonus norm play check-dos2unix dos2unix unix2dos
