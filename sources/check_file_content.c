@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:51:35 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/12 23:17:07 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/13 00:15:20 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,75 +17,35 @@ int	check_post_map(t_data *data)
 	int		i;
 	char	*line;
 	char	**temp_cubfile;
+	int		end_map;
+	int		start_map;
 
-	i = get_index_to_end_map(data);
-	if (i == 0)
-		return (FAILURE);
 	temp_cubfile = data->file_info.cub_file;
+	start_map = 0;
+	end_map = 0;
+	i = 0;
 	while (temp_cubfile[i])
 	{
 		line = temp_cubfile[i];
-		if (check_spaces_line(line) == FAILURE)
-			return (FAILURE);
-		if (check_line_has_content(line) == FAILURE)
+		if (!start_map && ft_isdigit(line[0]))
+			start_map = 1;
+		if (start_map && !ft_isdigit(line[0]))
+			end_map = 1;
+		if (end_map && line[0] != '\n')
 			return (FAILURE);
 		i++;
 	}
 	return (SUCCESS);
 }
 
-int	get_index_to_end_map(t_data *data)
-{
-	int		i;
-	int		j;
-	char	*line;
-	char	**temp_cubfile;
-
-	i = 0;
-	temp_cubfile = data->file_info.cub_file;
-	while (temp_cubfile[i])
-	{
-		line = temp_cubfile[i];
-		j = 0;
-		while (line[j] == '\t' || line[j] == ' ')
-			j++;
-		if (ft_isdigit(line[j]))
-		{
-			i += data->map_rows;
-			return (i);
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	check_spaces_line(char *line)
-{
-	int		i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == ' ' || line[i] == '\t')
-			i++;
-		else
-			return (SUCCESS);
-	}
-	if (line[i] == '\0')
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-int	check_line_has_content(char *line)
+void	print_map(char **map)
 {
 	int	i;
 
 	i = 0;
-	while (line[i])
+	while (map[i])
 	{
-		if (ft_isalnum(line[i]))
-			return (FAILURE);
+		printf("%s\n", map[i]);
 		i++;
 	}
-	return (SUCCESS);
 }

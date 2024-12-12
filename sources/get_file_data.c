@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:54:52 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/12 23:04:50 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/12 23:41:21 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ int	get_map(t_data *data)
 			i++;
 		if (ft_isdigit(line[i]))
 			data->map[j++] = dup_map(line);
+		if (line[i] == '\0')
+			break ;
 		temp_cubfile++;
 		line = *temp_cubfile;
 	}
+	print_map(data->map);
 	return (SUCCESS);
 }
 

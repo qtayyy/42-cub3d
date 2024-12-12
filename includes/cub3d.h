@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/12 23:02:44 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/12 23:30:24 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int				check_rgb(int *rgb);
 unsigned long	convert_rgb_hex(int *rgb);
 
 /* POST-MAP CONTENT CHECK */
+void			print_map(char **map);
 int				check_post_map(t_data *data);
 int				check_line_has_content(char *line);
 int				check_spaces_line(char *line);
