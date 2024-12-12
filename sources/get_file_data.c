@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:54:52 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/09 13:31:39 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/12 23:41:21 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ int	get_map(t_data *data)
 			i++;
 		if (ft_isdigit(line[i]))
 			data->map[j++] = dup_map(line);
+		if (line[i] == '\0')
+			break ;
 		temp_cubfile++;
 		line = *temp_cubfile;
 	}
+	print_map(data->map);
 	return (SUCCESS);
 }
 
@@ -84,5 +87,7 @@ int	get_file(char *file_path, t_data *data)
 		return (err_msg("Texture error"), FAILURE); // change error msg
 	if (get_map(data) == FAILURE)
 		return (err_msg("Map Eeror"), FAILURE);
+	if (check_post_map(data) == FAILURE)
+		return (err_msg("Unexpected content after map"), FAILURE);
 	return (SUCCESS);
 }
