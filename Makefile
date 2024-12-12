@@ -51,8 +51,11 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 #--------Includes--------#
 INC			=	-I ./includes/ -I ./libft/ -I ./minilibx-linux/
 
+#--------Dos2Unix--------#
+DOS2UNIX_FOLDERS = ./includes ./libft ./maps ./minilibx-linux ./sources ./textures
+
 #--------Main rule---------#
-all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
+all: check-dos2unix $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
 
 #--------Objects directory rule---------#
 $(OBJ_PATH):
@@ -78,6 +81,8 @@ $(LIBFT):
 #--------MLX rule--------#
 $(MLX):
 	@ echo $(YELLOW)"Compiling Minilibx..."$(RESET)
+	@ cd $(MLX_PATH) && ./configure > /dev/null 2>&1
+	@ cd ..
 	@ make -s -C $(MLX_PATH) > /dev/null 2>&1
 	@ echo $(GREEN)"Minilibx compiled"$(RESET)
 
@@ -88,6 +93,8 @@ clean:
 	@ echo $(CYAN)"Cleaning Libft objects..."$(RESET)
 	@ make -s -C $(LIBFT_PATH) clean
 	@ echo $(CYAN)"Cleaning Minilibx objects..."$(RESET)
+	@ cd $(MLX_PATH) && ./configure > /dev/null 2>&1
+	@ cd ..
 	@ make -s -C $(MLX_PATH) clean  > /dev/null 2>&1
 	@ echo $(GREEN)"Objects cleaned"$(RESET)
 
@@ -107,4 +114,22 @@ play: all
 	@ echo $(GREEN)"Playing Cub3D..."$(RESET)"|"$(MAGENTA)" Map : sponge.cub"$(RESET)
 	@ ./$(NAME) maps/sponge.cub
 
-.PHONY: all re clean fclean bonus
+check-dos2unix:
+	@ command -v dos2unix >/dev/null 2>&1 && { \
+		echo $(MAGENTA)"Dos2unix is found"$(RESET); \
+	} || { \
+		echo "dos2unix not found. Installing..."; \
+		sudo apt update && sudo apt install -y dos2unix; \
+	}
+
+dos2unix: check-dos2unix
+	@ for folder in $(DOS2UNIX_FOLDERS); do \
+		find $$folder -type f -exec dos2unix {} \;; \
+	done
+
+unix2dos: check-dos2unix
+	@ for folder in $(DOS2UNIX_FOLDERS); do \
+		find $$folder -type f -exec unix2dos {} \;; \
+	done
+
+.PHONY: all re clean fclean bonus norm play check-dos2unix dos2unix unix2dos
