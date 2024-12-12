@@ -55,7 +55,7 @@ INC			=	-I ./includes/ -I ./libft/ -I ./minilibx-linux/
 DOS2UNIX_FOLDERS = ./includes ./libft ./maps ./minilibx-linux ./sources ./textures
 
 #--------Main rule---------#
-all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
+all: check-dos2unix $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
 
 #--------Objects directory rule---------#
 $(OBJ_PATH):
@@ -81,6 +81,8 @@ $(LIBFT):
 #--------MLX rule--------#
 $(MLX):
 	@ echo $(YELLOW)"Compiling Minilibx..."$(RESET)
+	@ cd $(MLX_PATH) && ./configure > /dev/null 2>&1
+	@ cd ..
 	@ make -s -C $(MLX_PATH) > /dev/null 2>&1
 	@ echo $(GREEN)"Minilibx compiled"$(RESET)
 
@@ -91,6 +93,8 @@ clean:
 	@ echo $(CYAN)"Cleaning Libft objects..."$(RESET)
 	@ make -s -C $(LIBFT_PATH) clean
 	@ echo $(CYAN)"Cleaning Minilibx objects..."$(RESET)
+	@ cd $(MLX_PATH) && ./configure > /dev/null 2>&1
+	@ cd ..
 	@ make -s -C $(MLX_PATH) clean  > /dev/null 2>&1
 	@ echo $(GREEN)"Objects cleaned"$(RESET)
 
@@ -112,7 +116,7 @@ play: all
 
 check-dos2unix:
 	@ command -v dos2unix >/dev/null 2>&1 && { \
-		echo "dos2unix is found"; \
+		echo $(MAGENTA)"Dos2unix is found"$(RESET); \
 	} || { \
 		echo "dos2unix not found. Installing..."; \
 		sudo apt update && sudo apt install -y dos2unix; \
