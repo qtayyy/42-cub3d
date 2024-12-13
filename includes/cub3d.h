@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/12 23:30:24 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/13 22:59:41 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,34 @@
 # define WIN_HEIGHT 900
 # define WIN_WIDTH 1280
 # define TEXTURE_SIZE 64
+
+/* KEYCODE */
+
+# if defined(__APPLE__)
+#  define KEY_W 13
+#  define KEY_S 1
+#  define KEY_A 0
+#  define KEY_D 2
+#  define KEY_ESC 53
+#  define KEY_UP 126
+#  define KEY_DOWN 125
+#  define KEY_LEFT 123
+#  define KEY_RIGHT 124
+
+# elif defined(__linux__)
+#  define KEY_W 119
+#  define KEY_S 115
+#  define KEY_A 97
+#  define KEY_D 100
+#  define KEY_ESC 65307
+#  define KEY_UP 65362
+#  define KEY_DOWN 65364
+#  define KEY_LEFT 65361
+#  define KEY_RIGHT 65363
+# endif
+
+# define MOVE_SPEED 0.0125
+# define ROTATE_SPEED 0.015
 
 enum e_texture_index
 {
@@ -84,7 +112,20 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	int		has_moved;
+	int		move_x;
+	int		move_y;
+	t_move	movement;
+	int		rotate;
 }	t_player;
+
+typedef enum s_move
+{
+	FORWARD = 1,
+	BACKWARD = 2,
+	LEFT = 3,
+	RIGHT = 4
+}	t_move;
 
 typedef struct s_ray
 {
@@ -120,6 +161,7 @@ typedef struct s_data
 	t_player	player;
 	t_ray		ray;
 }	t_data;
+
 
 /* UTILIZATION */
 void			err_msg(char *msg);
@@ -160,5 +202,21 @@ void			render_raycast(t_data *data);
 void			raycasting(t_data *data, t_player *player);
 void			init_raycasting(int x, t_ray *ray, t_player *player);
 void			init_dda_algo(t_ray *ray, t_player *player);
+
+/* INPUT HANDLER */
+void			input_handler(t_data *data);
+int				key_press_handler(int keycode, t_data *data);
+int				key_release_handler(int keycode, t_data *data);
+
+/* RENDER IF EVENT HAPPENS */
+int				render_if_event(t_data *data);
+
+/* FREE */
+int				exit_cub3d(t_data *data);
+void			clean_before_exit(t_data *data, int code);
+void			free_data(t_data *data);
+void			free_texture(t_textures *tex_info);
+void			free_file_info(t_cubfile *file_info);
+
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 23:19:34 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/05 13:47:47 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/13 20:27:47 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ void	init_player(t_player *player)
 	player->dir_y = 0.0;
 	player->plane_x = 0.0;
 	player->plane_y = 0.0;
+	player->has_moved = 0;
+	player->move_x = 0;
+	player->move_y = 0;
+	player->rotate = 0;
 }
 
 void	init_textures_info(t_textures *tex_info)
