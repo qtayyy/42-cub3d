@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/13 22:59:41 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/15 04:03:49 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@
 #  define KEY_RIGHT 65363
 # endif
 
-# define MOVE_SPEED 0.0125
-# define ROTATE_SPEED 0.015
+# define MOVE_STEP 0.0125
+# define ROTATE_STEP 0.015
 
 enum e_texture_index
 {
@@ -103,6 +103,16 @@ typedef struct s_textures
 	double			tex_pos;
 }	t_textures;
 
+typedef enum s_move
+{
+	FORWARD = 1,
+	BACKWARD = 2,
+	LEFT = 3,
+	RIGHT = 4,
+	CLOCKWISE = 5,
+	ANTICLOCKWISE = 6
+}	t_move;
+
 typedef struct s_player
 {
 	char	dir;
@@ -112,20 +122,13 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	double	delta;
 	int		has_moved;
 	int		move_x;
 	int		move_y;
 	t_move	movement;
 	int		rotate;
 }	t_player;
-
-typedef enum s_move
-{
-	FORWARD = 1,
-	BACKWARD = 2,
-	LEFT = 3,
-	RIGHT = 4
-}	t_move;
 
 typedef struct s_ray
 {
@@ -210,6 +213,20 @@ int				key_release_handler(int keycode, t_data *data);
 
 /* RENDER IF EVENT HAPPENS */
 int				render_if_event(t_data *data);
+
+/* PLAYER MOVEMENT */
+int				move_player(t_data *data);
+int				move_forward(t_data *data);
+int				move_backward(t_data *data);
+int				move_left(t_data *data);
+int				move_right(t_data *data);
+int				check_valid_move(t_data *data, double new_x, double new_y);
+int				is_not_wall(t_data *data, double x, double y);
+
+/* CAMERA MOVEMENT */
+int				rotate_player(t_data *data);
+int				rotate_clockwise(t_data *data);
+int				rotate_anticlockwise(t_data *data);
 
 /* FREE */
 int				exit_cub3d(t_data *data);

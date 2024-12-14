@@ -43,6 +43,7 @@ SRC		= 	main.c \
 			input_handler.c \
 			render_event.c \
 			player_movement.c \
+			player_rotation.c \
 			valid_move.c \
 			exit.c \
 			free_data.c \

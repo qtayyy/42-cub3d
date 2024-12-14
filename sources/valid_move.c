@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 01:35:34 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/14 02:37:35 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/15 00:34:03 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	check_valid_move(t_data *data, double new_x, double new_y)
 		data->player.pos_x = new_x;
 		valid_move = 1;
 	}
+	return (valid_move);
 }
 
 int	is_not_wall(t_data *data, double x, double y)
