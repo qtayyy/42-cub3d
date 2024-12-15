@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:49:43 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/15 03:56:12 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/15 15:28:31 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ int	move_backward(t_data *data)
 	return (valid_move);
 }
 
-/*
-	define axis, the axis right (-1) and left (1) of the player
-*/
 int	move_left(t_data *data)
 {
 	double	new_x;

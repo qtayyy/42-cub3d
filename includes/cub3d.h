@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/15 04:03:49 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/15 23:40:54 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <string.h>
 # include <errno.h>
 # include "mlx.h"
+# include <X11/X.h> // for mouse pointer motion
+# include <X11/keysym.h> // for keyboard mask and keycode
 # include "../libft/libft.h"
 
 # define SUCCESS 0
@@ -29,9 +31,10 @@
 # define VERTICAL 0
 # define HORIZONTAL 1
 
-# define WIN_HEIGHT 900
-# define WIN_WIDTH 1280
+# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1920
 # define TEXTURE_SIZE 64
+# define EDGE_WIND 25
 
 /* KEYCODE */
 
@@ -210,6 +213,8 @@ void			init_dda_algo(t_ray *ray, t_player *player);
 void			input_handler(t_data *data);
 int				key_press_handler(int keycode, t_data *data);
 int				key_release_handler(int keycode, t_data *data);
+int				mouse_motion_handler(int x, int y, t_data *data);
+void			wrap_mouse_position(t_data *data, int x, int y);
 
 /* RENDER IF EVENT HAPPENS */
 int				render_if_event(t_data *data);
