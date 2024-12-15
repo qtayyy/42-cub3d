@@ -40,6 +40,13 @@ SRC		= 	main.c \
 			rendering.c \
 			raycasting.c \
 			raycasting_utils.c \
+			input_handler.c \
+			render_event.c \
+			player_movement.c \
+			player_rotation.c \
+			valid_move.c \
+			exit.c \
+			free_data.c \
 			utils.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))

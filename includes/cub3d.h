@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/12 23:30:24 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/15 23:40:54 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <string.h>
 # include <errno.h>
 # include "mlx.h"
+# include <X11/X.h> // for mouse pointer motion
+# include <X11/keysym.h> // for keyboard mask and keycode
 # include "../libft/libft.h"
 
 # define SUCCESS 0
@@ -29,9 +31,38 @@
 # define VERTICAL 0
 # define HORIZONTAL 1
 
-# define WIN_HEIGHT 900
-# define WIN_WIDTH 1280
+# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1920
 # define TEXTURE_SIZE 64
+# define EDGE_WIND 25
+
+/* KEYCODE */
+
+# if defined(__APPLE__)
+#  define KEY_W 13
+#  define KEY_S 1
+#  define KEY_A 0
+#  define KEY_D 2
+#  define KEY_ESC 53
+#  define KEY_UP 126
+#  define KEY_DOWN 125
+#  define KEY_LEFT 123
+#  define KEY_RIGHT 124
+
+# elif defined(__linux__)
+#  define KEY_W 119
+#  define KEY_S 115
+#  define KEY_A 97
+#  define KEY_D 100
+#  define KEY_ESC 65307
+#  define KEY_UP 65362
+#  define KEY_DOWN 65364
+#  define KEY_LEFT 65361
+#  define KEY_RIGHT 65363
+# endif
+
+# define MOVE_STEP 0.0125
+# define ROTATE_STEP 0.015
 
 enum e_texture_index
 {
@@ -75,6 +106,16 @@ typedef struct s_textures
 	double			tex_pos;
 }	t_textures;
 
+typedef enum s_move
+{
+	FORWARD = 1,
+	BACKWARD = 2,
+	LEFT = 3,
+	RIGHT = 4,
+	CLOCKWISE = 5,
+	ANTICLOCKWISE = 6
+}	t_move;
+
 typedef struct s_player
 {
 	char	dir;
@@ -84,6 +125,12 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	double	delta;
+	int		has_moved;
+	int		move_x;
+	int		move_y;
+	t_move	movement;
+	int		rotate;
 }	t_player;
 
 typedef struct s_ray
@@ -120,6 +167,7 @@ typedef struct s_data
 	t_player	player;
 	t_ray		ray;
 }	t_data;
+
 
 /* UTILIZATION */
 void			err_msg(char *msg);
@@ -160,5 +208,37 @@ void			render_raycast(t_data *data);
 void			raycasting(t_data *data, t_player *player);
 void			init_raycasting(int x, t_ray *ray, t_player *player);
 void			init_dda_algo(t_ray *ray, t_player *player);
+
+/* INPUT HANDLER */
+void			input_handler(t_data *data);
+int				key_press_handler(int keycode, t_data *data);
+int				key_release_handler(int keycode, t_data *data);
+int				mouse_motion_handler(int x, int y, t_data *data);
+void			wrap_mouse_position(t_data *data, int x, int y);
+
+/* RENDER IF EVENT HAPPENS */
+int				render_if_event(t_data *data);
+
+/* PLAYER MOVEMENT */
+int				move_player(t_data *data);
+int				move_forward(t_data *data);
+int				move_backward(t_data *data);
+int				move_left(t_data *data);
+int				move_right(t_data *data);
+int				check_valid_move(t_data *data, double new_x, double new_y);
+int				is_not_wall(t_data *data, double x, double y);
+
+/* CAMERA MOVEMENT */
+int				rotate_player(t_data *data);
+int				rotate_clockwise(t_data *data);
+int				rotate_anticlockwise(t_data *data);
+
+/* FREE */
+int				exit_cub3d(t_data *data);
+void			clean_before_exit(t_data *data, int code);
+void			free_data(t_data *data);
+void			free_texture(t_textures *tex_info);
+void			free_file_info(t_cubfile *file_info);
+
 
 #endif
