@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_validity.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:21:21 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 15:25:35 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 19:21:47 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,9 @@ int	check_map_closed(char **map, int rows)
 
 	i = 0;
 	prev = ft_strlen(map[0]);
-	// if (ft_strspn(map[0], "1") != prev
-	// 	|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows - 1]))
-	// 	return (FAILURE);
 	while (++i < rows - 1)
 	{
 		cur = ft_strlen(map[i]);
-		// if (map[i][0] != '1' || map[i][cur - 1] != '1')
-		// 	return (FAILURE);
 		if (cur > prev
 			&& ft_strspn(map[i] + prev - 1, "1") != cur - prev + 1)
 			return (FAILURE);
@@ -77,7 +72,7 @@ int	check_map_elements(t_data *data)
 		{
 			if (ft_strchr("01NSEW", map[i][j]) == NULL)
 				return (FAILURE);
-			else if (ft_strchr("NSEW", map[i][j])) // might not be necessary
+			else if (ft_strchr("NSEW", map[i][j]))
 			{
 				data->player.dir = map[i][j];
 				data->map[i][j] = '0';
@@ -92,7 +87,8 @@ int	check_map_elements(t_data *data)
 
 int	check_textures(t_textures *tex_info)
 {
-	if (!tex_info->north || !tex_info->south || !tex_info->east || !tex_info->west)
+	if (!tex_info->north || !tex_info->south || !tex_info->east
+		|| !tex_info->west)
 		return (err_msg("Direction texture missing"), FAILURE);
 	if (check_texture_ext(tex_info) == FAILURE)
 		return (FAILURE);
@@ -118,7 +114,8 @@ int	check_map(t_data *data)
 	if (check_num_players(data->map) == FAILURE)
 		return (err_msg("This is a single player game"), FAILURE);
 	if (check_map_elements(data) == FAILURE)
-		return (err_msg("Map should only contain 0, 1 and one of NSEW"), FAILURE);
+		return (err_msg("Map should only contain 0, 1 and one of NSEW"),
+			FAILURE);
 	if (check_textures(&data->tex_info) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:52:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 14:43:01 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/16 19:29:38 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,25 @@ void	run_dda_algo(t_data *data, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = HORIZONTAL;
 		}
-		if (data->map[ray->map_y][ray->map_x] != '0') // don't have ray out of bounds
+		if (data->map[ray->map_y][ray->map_x] != '0')
 			hit = 1;
 	}
 }
 
 /**
- * Can divide perp_wall_dist by cos(camera_x) to simulate fisheye effect 
+ * Can divide perp_wall_dist by cos(camera_x) to simulate fisheye effect
  */
 void	calculate_line_height(t_ray *ray, t_player *player)
 {
 	if (ray->side == VERTICAL)
 	{
-		ray->perp_wall_dist = (ray->start_x - ray->deltadist_x); // * cos(ray->camera_x);
-		ray->wall_x = player->pos_y + ray->perp_wall_dist * ray->dir_y; // pos_y + how much the ray moved vertically per unit horizontally (n * diry/dirx)
+		ray->perp_wall_dist = (ray->start_x - ray->deltadist_x);
+		ray->wall_x = player->pos_y + ray->perp_wall_dist * ray->dir_y;
 	}
 	else
 	{
-		ray->perp_wall_dist = (ray->start_y - ray->deltadist_y); // * cos(ray->camera_x);
-		ray->wall_x = player->pos_x + ray->perp_wall_dist * ray->dir_x; // pos_x + how much you move horizontally per unit vertically (n * dirx/diry)
+		ray->perp_wall_dist = (ray->start_y - ray->deltadist_y);
+		ray->wall_x = player->pos_x + ray->perp_wall_dist * ray->dir_x;
 	}
 	ray->wall_x -= floor(ray->wall_x);
 	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
@@ -61,7 +61,7 @@ void	calculate_line_height(t_ray *ray, t_player *player)
 		ray->draw_end = WIN_HEIGHT - 1;
 }
 
-int		get_texture_index(t_ray *ray)
+int	get_texture_index(t_ray *ray)
 {
 	if (ray->side == VERTICAL)
 	{
@@ -84,25 +84,20 @@ void	update_screen_pixel(t_data *data, t_ray *ray,
 	int		color;
 
 	tex_info->tex_index = get_texture_index(ray);
-	tex_info->tex_x = (int)(ray->wall_x * (double)TEXTURE_SIZE); // scale it up to 64 * 64
-	if ((ray->side == VERTICAL && ray->dir_x > 0) // mirror effect
+	tex_info->tex_x = (int)(ray->wall_x * (double)TEXTURE_SIZE);
+	if ((ray->side == VERTICAL && ray->dir_x > 0)
 		|| (ray->side == HORIZONTAL && ray->dir_y < 0))
 		tex_info->tex_x = TEXTURE_SIZE - tex_info->tex_x - 1;
-	//	increment tells us how much to move texture pixel per screen pixel (amount by
-	//	which the texture coordinate should increment for each pixel in the vertical stripe of the wall being rendered)
 	tex_info->increment = (double)TEXTURE_SIZE / ray->line_height;
-	//	starting texture coordinate (initial vertical position in the texture). If line height > WIN_HEIGHT
-	//	then we'll get tex->pos > 0 since they've moved out of the screen. All others will have tex->pos == 0
-	//	multiplied by increment to get the actual position in the texture
 	tex_info->tex_pos = (ray->draw_start + (ray->line_height - WIN_HEIGHT) / 2)
 		* tex_info->increment;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		tex_info->tex_y = (int)tex_info->tex_pos & (TEXTURE_SIZE - 1); // starting texture y-coordinate: mask to prevent overflow
+		tex_info->tex_y = (int)tex_info->tex_pos & (TEXTURE_SIZE - 1);
 		tex_info->tex_pos += tex_info->increment;
 		color = data->textures[tex_info->tex_index]
-		[TEXTURE_SIZE * tex_info->tex_y + tex_info->tex_x]; // 64 * tex_y brings you to that row
+		[TEXTURE_SIZE * tex_info->tex_y + tex_info->tex_x];
 		if (color > 0)
 			data->screen_pixels[y][x] = color;
 		y++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:54:52 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 13:44:46 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 19:22:13 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	get_file(char *file_path, t_data *data)
 	if (copy_cub_file(file_path, data) == FAILURE)
 		return (FAILURE);
 	if (get_textures(data))
-		return (err_msg("Texture error"), FAILURE); // change error msg
+		return (err_msg("Texture error"), FAILURE);
 	if (get_map(data) == FAILURE)
 		return (err_msg("Map Eeror"), FAILURE);
 	if (check_post_map(data) == FAILURE)

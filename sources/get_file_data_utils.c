@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:56:44 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 17:58:11 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/16 19:18:33 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	dup_cub_file(char *file_path, t_cubfile *file_info)
 static void	dup_dir_texture(char *line,	char **tex_dir)
 {
 	char	*trimmed;
+
 	while (*line == '\t' || *line == ' ')
 		line++;
 	trimmed = ft_strtrim(line, " \n");
