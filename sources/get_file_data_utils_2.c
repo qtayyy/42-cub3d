@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:14:51 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/09 13:18:44 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/16 17:45:09 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,11 @@ static void	dup_color_texture(char *line, int **tex_color)
 	}
 	*tex_color = ft_calloc(4, sizeof(int));
 	temp_color = *tex_color;
-	// // if (*tex_color == NULL)
-	// // {
-	// // 	strerror() // malloc error
-	// // }
+	if (*tex_color == NULL)
+	{
+		err_msg("malloc error");
+		return ;
+	}
 	token = ft_strtok(line, ",");
 	while (token && *token != '\n')
 	{

@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:56:44 by qtay              #+#    #+#             */
-/*   Updated: 2024/11/06 09:42:19 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/16 17:58:11 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,22 @@ int	dup_cub_file(char *file_path, t_cubfile *file_info)
 
 static void	dup_dir_texture(char *line,	char **tex_dir)
 {
+	char	*trimmed;
 	while (*line == '\t' || *line == ' ')
 		line++;
-	*tex_dir = ft_strdup(ft_strtrim(line, " \n"));
+	trimmed = ft_strtrim(line, " \n");
+	if (trimmed == NULL)
+	{
+		err_msg("malloc error");
+		return ;
+	}
+	*tex_dir = ft_strdup(trimmed);
+	free(trimmed);
+	if (*tex_dir == NULL)
+	{
+		free_double_arr((void **)tex_dir);
+		return ;
+	}
 }
 
 void	extract_dir_textures(char *line, t_textures *tex_info)
