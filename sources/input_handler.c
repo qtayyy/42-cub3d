@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:47:16 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/16 14:12:28 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 18:24:36 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int	mouse_motion_handler(int x, int y, t_data *data)
 	if (old_x < EDGE_WIND)
 		mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	return (0);
-	
 }
 
 int	change_cursor_visibility(t_player *player)
