@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 14:33:07 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 14:36:54 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define VERTICAL 0
 # define HORIZONTAL 1
 
-# define TRUE 1
-# define FALSE 0
+# define TRUE 0
+# define FALSE 1
 
 # define WIN_HEIGHT 1080
 # define WIN_WIDTH 1920
