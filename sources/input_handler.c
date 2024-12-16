@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:47:16 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/16 18:24:36 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 18:53:04 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ void	input_handler(t_data *data)
 {
 	mlx_hook(data->win, DestroyNotify, NoEventMask, exit_cub3d, data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, key_press_handler, data);
-	mlx_hook(data->win, KeyRelease, KeyReleaseMask , key_release_handler, data);
-	mlx_hook(data->win, MotionNotify, PointerMotionMask, mouse_motion_handler, data);
+	mlx_hook(data->win, KeyRelease, KeyReleaseMask, key_release_handler, data);
+	mlx_hook(data->win, MotionNotify, PointerMotionMask, mouse_motion_handler,
+		data);
 }
 
 int	mouse_motion_handler(int x, int y, t_data *data)
 {
-	static int		old_x;
-	static int		old_y;
-	int				diff_x;
+	static int	old_x;
+	static int	old_y;
+	int			diff_x;
 
 	(void)y;
-	mlx_mouse_hide(data->mlx, data->win);
 	diff_x = x - old_x;
 	if (diff_x > 0)
 		data->player.has_moved += rotate_anticlockwise(data);

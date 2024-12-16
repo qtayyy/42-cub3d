@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_validity_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:40:36 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/09 14:33:31 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 18:54:44 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_file(char *file_path)
 {
-	int		len;
+	int	len;
 
 	len = ft_strlen(file_path);
 	if (ft_strncmp(file_path + len - 4, ".cub", 4) != 0)
@@ -63,10 +63,12 @@ unsigned long	convert_rgb_hex(int *rgb)
 
 int	check_texture_ext(t_textures *tex_info)
 {
-	if (ft_strncmp(tex_info->north + ft_strlen(tex_info->north) - 4, ".xpm", 4) != 0
-		|| ft_strncmp(tex_info->south + ft_strlen(tex_info->south) - 4, ".xpm", 4) != 0
-		|| ft_strncmp(tex_info->east + ft_strlen(tex_info->east) - 4, ".xpm", 4) != 0
-		|| ft_strncmp(tex_info->west + ft_strlen(tex_info->west) - 4, ".xpm", 4) != 0)
+	if (ft_strncmp(tex_info->north + ft_strlen(tex_info->north) - 4, ".xpm",
+			4) != 0 || ft_strncmp(tex_info->south + ft_strlen(tex_info->south)
+			- 4, ".xpm", 4) != 0 || ft_strncmp(tex_info->east
+			+ ft_strlen(tex_info->east) - 4, ".xpm", 4) != 0
+		|| ft_strncmp(tex_info->west + ft_strlen(tex_info->west) - 4, ".xpm",
+			4) != 0)
 		return (err_msg("Texture files must end with .xpm"), FAILURE);
 	return (SUCCESS);
 }

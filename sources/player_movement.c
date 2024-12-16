@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:49:43 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/15 15:28:31 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 18:51:04 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	move_player(t_data *data)
 {
-	int		move_count;
+	int	move_count;
 
 	move_count = 0;
 	if (data->player.movement == FORWARD)
@@ -37,8 +37,8 @@ int	move_forward(t_data *data)
 {
 	double	new_x;
 	double	new_y;
-	int	valid_move;
-	
+	int		valid_move;
+
 	new_x = data->player.pos_x + data->player.dir_x * MOVE_STEP;
 	new_y = data->player.pos_y + data->player.dir_y * MOVE_STEP;
 	valid_move = check_valid_move(data, new_x, new_y);
@@ -49,8 +49,8 @@ int	move_backward(t_data *data)
 {
 	double	new_x;
 	double	new_y;
-	int	valid_move;
-	
+	int		valid_move;
+
 	new_x = data->player.pos_x - data->player.dir_x * MOVE_STEP;
 	new_y = data->player.pos_y - data->player.dir_y * MOVE_STEP;
 	valid_move = check_valid_move(data, new_x, new_y);
@@ -61,8 +61,8 @@ int	move_left(t_data *data)
 {
 	double	new_x;
 	double	new_y;
-	int	valid_move;
-	
+	int		valid_move;
+
 	new_x = data->player.pos_x + data->player.dir_y * MOVE_STEP;
 	new_y = data->player.pos_y - data->player.dir_x * MOVE_STEP;
 	valid_move = check_valid_move(data, new_x, new_y);
@@ -73,8 +73,8 @@ int	move_right(t_data *data)
 {
 	double	new_x;
 	double	new_y;
-	int	valid_move;
-	
+	int		valid_move;
+
 	new_x = data->player.pos_x - data->player.dir_y * MOVE_STEP;
 	new_y = data->player.pos_y + data->player.dir_x * MOVE_STEP;
 	valid_move = check_valid_move(data, new_x, new_y);

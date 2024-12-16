@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 14:46:40 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 18:45:56 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 # define TEXTURE_SIZE 64
 # define EDGE_WIND 25
 
-
 /* KEYCODE */
 
 # if defined(__APPLE__)
@@ -66,8 +65,8 @@
 #  define KEY_LCTRL 65507
 # endif
 
-# define MOVE_STEP 0.015
-# define ROTATE_STEP 0.015
+# define MOVE_STEP 0.05 // 0.015
+# define ROTATE_STEP 0.02
 
 enum e_texture_index
 {
@@ -173,7 +172,6 @@ typedef struct s_data
 	t_ray		ray;
 }	t_data;
 
-
 /* UTILIZATION */
 void			err_msg(char *msg);
 void			free_double_arr(void **double_arr);
@@ -253,6 +251,5 @@ void			clean_before_exit(t_data *data, int code);
 void			free_data(t_data *data);
 void			free_texture(t_textures *tex_info);
 void			free_file_info(t_cubfile *file_info);
-
 
 #endif

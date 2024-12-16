@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_validity_utils2.c                            :+:      :+:    :+:   */
+/*   check_validity_utils_2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:28:25 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/16 14:43:07 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 18:53:59 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ char	**duplicate_map(char **map, int rows)
 
 int	flood_fill(char **map, int height)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map[i])
@@ -76,7 +76,7 @@ void	flood_fill_recursive(char **map, int i, int j, int height)
 {
 	if (i < 0 || i >= height || j < 0 || j >= (int)ft_strlen(map[i])
 		|| map[i][j] == '1')
-		return;
+		return ;
 	if (map[i][j] == ' ')
 	{
 		map[i][j] = 'X';
