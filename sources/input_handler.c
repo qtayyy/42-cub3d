@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:47:16 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/16 01:43:36 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 14:12:28 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	key_press_handler(int keycode, t_data *data)
 {
+	printf("keycode: %d\n", keycode);
 	if (keycode == KEY_ESC)
 		exit_cub3d(data);
 	if (keycode == KEY_W)
@@ -28,6 +29,8 @@ int	key_press_handler(int keycode, t_data *data)
 		data->player.movement = ANTICLOCKWISE;
 	if (keycode == KEY_RIGHT)
 		data->player.movement = CLOCKWISE;
+	if (keycode == KEY_LCTRL)
+		change_cursor_visibility(&data->player);
 	return (0);
 }
 
@@ -60,35 +63,31 @@ void	input_handler(t_data *data)
 
 int	mouse_motion_handler(int x, int y, t_data *data)
 {
-	// static int		old_x;
-	// static int		old_y;
-	// int				diff_x;
-	int				half_width;
+	static int		old_x;
+	static int		old_y;
+	int				diff_x;
 
 	(void)y;
-	half_width = WIN_WIDTH / 2;
-	if (x > half_width)
-		data->player.has_moved += rotate_clockwise(data);
-	else if (x < half_width)
+	mlx_mouse_hide(data->mlx, data->win);
+	diff_x = x - old_x;
+	if (diff_x > 0)
 		data->player.has_moved += rotate_anticlockwise(data);
-	printf("-------BEFORE-------\n");
-	mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
-	printf("x: %d\n", x);
-	printf("y: %d\n", y);
-	mlx_mouse_move(data->mlx, data->win, half_width, WIN_HEIGHT);
-	mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
-	printf("-------AFTER-------\n");
-	printf("x: %d\n", x);
-	printf("y: %d\n", y);
-	// diff_x = x - old_x;
-	// if (diff_x > 0)
-	// 	data->player.has_moved += rotate_anticlockwise(data);
-	// else if (diff_x < 0)
-	// 	data->player.has_moved += rotate_clockwise(data);
-	// mlx_mouse_get_pos(data->mlx, data->win, &old_x, &old_y);
-	// printf("old_x: %d\n", old_x);
-	// printf("old_y: %d\n", old_y);
-	// mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	else if (diff_x < 0)
+		data->player.has_moved += rotate_clockwise(data);
+	mlx_mouse_get_pos(data->mlx, data->win, &old_x, &old_y);
+	if (old_x > WIN_WIDTH - EDGE_WIND)
+		mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	if (old_x < EDGE_WIND)
+		mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	return (0);
 	
+}
+
+int	change_cursor_visibility(t_player *player)
+{
+	if (player->show_cursor)
+		player->show_cursor = 0;
+	else
+		player->show_cursor = 1;
+	return (0);
 }

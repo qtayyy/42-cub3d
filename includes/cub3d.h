@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/15 23:40:54 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 14:09:52 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@
 #  define KEY_DOWN 65364
 #  define KEY_LEFT 65361
 #  define KEY_RIGHT 65363
+#  define KEY_LCTRL 65507
 # endif
 
-# define MOVE_STEP 0.0125
+# define MOVE_STEP 0.015
 # define ROTATE_STEP 0.015
 
 enum e_texture_index
@@ -130,7 +131,7 @@ typedef struct s_player
 	int		move_x;
 	int		move_y;
 	t_move	movement;
-	int		rotate;
+	int		show_cursor;
 }	t_player;
 
 typedef struct s_ray
@@ -214,7 +215,8 @@ void			input_handler(t_data *data);
 int				key_press_handler(int keycode, t_data *data);
 int				key_release_handler(int keycode, t_data *data);
 int				mouse_motion_handler(int x, int y, t_data *data);
-void			wrap_mouse_position(t_data *data, int x, int y);
+int				change_cursor_visibility(t_player *player);
+int				toggle_cursor(t_data *data);
 
 /* RENDER IF EVENT HAPPENS */
 int				render_if_event(t_data *data);

@@ -63,7 +63,7 @@ INC			=	-I ./includes/ -I ./libft/ -I ./minilibx-linux/
 DOS2UNIX_FOLDERS = ./includes ./libft ./maps ./minilibx-linux ./sources ./textures
 
 #--------Main rule---------#
-all: check-dos2unix $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
+all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
 
 #--------Objects directory rule---------#
 $(OBJ_PATH):
