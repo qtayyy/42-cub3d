@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:54:50 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/13 20:16:54 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 19:27:23 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	exit_cub3d(t_data *data)
+int	exit_cub3d(t_data *data, int code)
 {
-	clean_before_exit(data, 0);
+	clean_before_exit(data, code);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:00 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/09 09:25:01 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/16 19:30:30 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void	init_screen_pixels(t_data *data)
 	data->screen_pixels = ft_calloc(WIN_HEIGHT + 1, sizeof(int *));
 	if (data->screen_pixels == NULL)
 	{
-		printf("Failed to allocate memory for screen_pixels\n");
-		exit(1); // Allocation failed, handle the error
+		err_msg("malloc error");
+		exit_cub3d(data, 1);
 	}
 	while (++i < WIN_HEIGHT)
 	{
 		data->screen_pixels[i] = ft_calloc(WIN_WIDTH + 1, sizeof(int));
 		if (data->screen_pixels[i] == NULL)
 		{
-			printf("screen pixel[%d] init fail\n", i);
-			exit(1); // Exit, or handle the memory cleanup and return gracefully
+			err_msg("malloc error");
+			exit_cub3d(data, 1);
 		}
 	}
 }

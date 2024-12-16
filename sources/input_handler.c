@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:47:16 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/16 18:53:04 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 19:31:13 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int	key_press_handler(int keycode, t_data *data)
 {
-	printf("keycode: %d\n", keycode);
 	if (keycode == KEY_ESC)
-		exit_cub3d(data);
+		exit_cub3d(data, 0);
 	if (keycode == KEY_W)
 		data->player.movement = FORWARD;
 	if (keycode == KEY_S)
@@ -37,7 +36,7 @@ int	key_press_handler(int keycode, t_data *data)
 int	key_release_handler(int keycode, t_data *data)
 {
 	if (keycode == KEY_ESC)
-		exit_cub3d(data);
+		exit_cub3d(data, 0);
 	if (keycode == KEY_W && data->player.movement == FORWARD)
 		data->player.movement = 0;
 	if (keycode == KEY_S && data->player.movement == BACKWARD)

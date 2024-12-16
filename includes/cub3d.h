@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 18:45:56 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 19:33:10 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,7 @@ int				rotate_clockwise(t_data *data);
 int				rotate_anticlockwise(t_data *data);
 
 /* FREE */
-int				exit_cub3d(t_data *data);
+int				exit_cub3d(t_data *data, int code);
 void			clean_before_exit(t_data *data, int code);
 void			free_data(t_data *data);
 void			free_texture(t_textures *tex_info);

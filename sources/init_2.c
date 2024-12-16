@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:30:19 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/15 04:36:27 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 19:28:14 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,16 @@ void	init_mlx(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (data->mlx == NULL)
-		return ; // some error msg
+	{
+		err_msg("malloc error");
+		exit_cub3d(data, 1);
+	}
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	if (data->win == NULL)
-		return ; // some error msg
+	{
+		err_msg("malloc error");
+		exit_cub3d(data, 1);
+	}
 	return ;
 }
 
