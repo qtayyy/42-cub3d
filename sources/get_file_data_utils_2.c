@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:14:51 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 19:17:41 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/16 19:51:59 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,11 @@ static int	count_num_delims(char *line, int delim)
 static void	dup_color_texture(char *line, int **tex_color)
 {
 	char	*token;
-	int		num_delims;
 	int		*temp_color;
 
 	while (*line == '\t' || *line == ' ')
 		line++;
-	num_delims = count_num_delims(line, ',');
-	if (num_delims != 2)
+	if (count_num_delims(line, ',') != 2)
 	{
 		err_msg("Invalid RGB");
 		return ;
