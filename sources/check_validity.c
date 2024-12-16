@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:21:21 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/09 14:43:37 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 14:27:51 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,9 @@ int	check_map(t_data *data)
 {
 	if (data->map_rows < 3)
 		return (err_msg("Map must contain at least 3 rows"), FAILURE);
-	// flood fill check space
-	// replace spaces in the map with 1 (get_file -> get_map -> dup_map)
+	if (check_enclosed_space(data->map, data->map_rows) == FAILURE)
+		return (err_msg("Map is not enclosed by walls!"), FAILURE);
+	replace_space_to_1(data->map, data->map_rows);
 	if (check_map_closed(data->map, data->map_rows) == FAILURE)
 		return (err_msg("Map is not closed by walls!"), FAILURE);
 	if (check_num_players(data->map) == FAILURE)
