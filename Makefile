@@ -15,6 +15,8 @@ NAME	= cub3D
 
 CC		= cc
 CFLAGS	= -Werror -Wextra -Wall #-g3 -fsanitize=address #-Werror -Wextra -Wall 
+#---------Maps----------#
+MAPS := $(shell ls maps/*.cub)
 
 #--------Minilibx--------#
 MLX_PATH	= minilibx-linux/
@@ -96,7 +98,6 @@ $(MLX):
 	@ make -s -C $(MLX_PATH) > /dev/null 2>&1
 	@ echo $(GREEN)"Minilibx compiled"$(RESET)
 
-
 clean:
 	@ echo $(CYAN)"Cleaning Cube3D objects..."$(RESET)
 	@ rm -rf $(OBJ_PATH)
@@ -123,6 +124,23 @@ norm:
 play: all
 	@ echo $(GREEN)"Playing Cub3D..."$(RESET)"|"$(MAGENTA)" Map : sponge.cub"$(RESET)
 	@ ./$(NAME) maps/sponge.cub
+
+run: all
+	@echo "Enter the number corresponding to the map you want to run:"
+	@/bin/bash -c '\
+	PS3="Select a map or Quit: "; \
+	select map in $(MAPS) "Quit"; do \
+		if [ "$$map" = "Quit" ]; then \
+			echo "Exiting."; \
+			break; \
+		elif [ -n "$$map" ]; then \
+			echo "Running $(NAME) with $$map..."; \
+			./$(NAME) $$map; \
+			break; \
+		else \
+			echo "Invalid selection."; \
+		fi; \
+	done'
 
 check-dos2unix:
 	@ command -v dos2unix >/dev/null 2>&1 && { \
