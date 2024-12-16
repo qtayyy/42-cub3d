@@ -33,6 +33,8 @@ SRC		= 	main.c \
 			init_2.c \
 			check_validity.c \
 			check_validity_utils.c \
+			check_validity_utils_2.c \
+			check_validity_utils_3.c \
 			get_file_data.c \
 			get_file_data_utils.c \
 			get_file_data_utils_2.c \
@@ -63,7 +65,7 @@ INC			=	-I ./includes/ -I ./libft/ -I ./minilibx-linux/
 DOS2UNIX_FOLDERS = ./includes ./libft ./maps ./minilibx-linux ./sources ./textures
 
 #--------Main rule---------#
-all: check-dos2unix $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
+all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
 
 #--------Objects directory rule---------#
 $(OBJ_PATH):

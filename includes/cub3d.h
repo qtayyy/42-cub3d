@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/15 23:40:54 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/16 14:46:40 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@
 # define VERTICAL 0
 # define HORIZONTAL 1
 
+# define TRUE 0
+# define FALSE 1
+
 # define WIN_HEIGHT 1080
 # define WIN_WIDTH 1920
 # define TEXTURE_SIZE 64
 # define EDGE_WIND 25
+
 
 /* KEYCODE */
 
@@ -59,9 +63,10 @@
 #  define KEY_DOWN 65364
 #  define KEY_LEFT 65361
 #  define KEY_RIGHT 65363
+#  define KEY_LCTRL 65507
 # endif
 
-# define MOVE_STEP 0.0125
+# define MOVE_STEP 0.015
 # define ROTATE_STEP 0.015
 
 enum e_texture_index
@@ -130,7 +135,7 @@ typedef struct s_player
 	int		move_x;
 	int		move_y;
 	t_move	movement;
-	int		rotate;
+	int		show_cursor;
 }	t_player;
 
 typedef struct s_ray
@@ -195,6 +200,14 @@ int				check_file_open(char *file_path);
 int				check_texture_ext(t_textures *tex_info);
 int				check_rgb(int *rgb);
 unsigned long	convert_rgb_hex(int *rgb);
+int				check_enclosed_space(char **map, int rows);
+char			**duplicate_map(char **map, int rows);
+int				flood_fill(char **map, int height);
+void			flood_fill_recursive(char **map, int i, int j, int max_h);
+int				scan_map(char **map, int height);
+int				check_surrounding(char **map, int i, int j, int max_h);
+int				is_0_or_player(char c);
+void			replace_space_to_1(char **map, int rows);
 
 /* POST-MAP CONTENT CHECK */
 void			print_map(char **map);
@@ -214,7 +227,8 @@ void			input_handler(t_data *data);
 int				key_press_handler(int keycode, t_data *data);
 int				key_release_handler(int keycode, t_data *data);
 int				mouse_motion_handler(int x, int y, t_data *data);
-void			wrap_mouse_position(t_data *data, int x, int y);
+int				change_cursor_visibility(t_player *player);
+int				toggle_cursor(t_data *data);
 
 /* RENDER IF EVENT HAPPENS */
 int				render_if_event(t_data *data);
