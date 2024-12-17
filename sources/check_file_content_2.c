@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   check_file_content_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 16:42:48 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/17 23:52:39 by nchok            ###   ########.fr       */
+/*   Created: 2024/12/18 00:18:06 by nchok             #+#    #+#             */
+/*   Updated: 2024/12/18 01:50:31 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/cub3d.h"
 
-size_t	ft_strlen(const char *s)
+int	line_has_only_digit_space(char *line)
 {
-	size_t	i;
+	while (*line)
+	{
+		if (!ft_isdigit(*line) || *line != ' ')
+			return (0);
+		line++;
+	}
+	return (1);
+}
+
+int	skip_to_map(char **temp_cubfile)
+{
+	int		i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
+	while (*temp_cubfile)
+	{
+		if (line_has_only_digit_space(*temp_cubfile))
+			return (i);
 		i++;
-	return (i);
+		temp_cubfile++;
+	}
+	return (0);
 }

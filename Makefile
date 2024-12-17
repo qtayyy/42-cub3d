@@ -41,6 +41,7 @@ SRC		= 	main.c \
 			get_file_data_utils.c \
 			get_file_data_utils_2.c \
 			check_file_content.c \
+			check_file_content_2.c \
 			rendering.c \
 			raycasting.c \
 			raycasting_utils.c \
@@ -51,6 +52,7 @@ SRC		= 	main.c \
 			valid_move.c \
 			exit.c \
 			free_data.c \
+			print.c \
 			utils.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
@@ -159,5 +161,8 @@ unix2dos: check-dos2unix
 	@ for folder in $(DOS2UNIX_FOLDERS); do \
 		find $$folder -type f -exec unix2dos {} \;; \
 	done
+
+valgrind: all
+	valgrind --leak-check=full ./$(NAME) maps/sponge.cub
 
 .PHONY: all re clean fclean bonus norm play check-dos2unix dos2unix unix2dos

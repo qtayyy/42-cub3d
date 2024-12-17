@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 16:42:48 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/17 23:52:39 by nchok            ###   ########.fr       */
+/*   Created: 2024/12/18 00:15:20 by nchok             #+#    #+#             */
+/*   Updated: 2024/12/18 00:15:38 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/cub3d.h"
 
-size_t	ft_strlen(const char *s)
+void	print_map(char **map)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
 		i++;
-	return (i);
+	}
 }
