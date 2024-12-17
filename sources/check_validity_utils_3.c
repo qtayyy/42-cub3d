@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_validity_utils3.c                            :+:      :+:    :+:   */
+/*   check_validity_utils_3.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:40:56 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/16 14:41:38 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 03:27:47 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,32 @@ void	replace_space_to_1(char **map, int rows)
 		}
 		i++;
 	}
+}
+
+int	check_map_elements(t_data *data)
+{
+	int		i;
+	int		j;
+	char	**map;
+
+	map = data->map;
+	i = -1;
+	while (map[++i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_strchr("01NSEW", map[i][j]) == NULL)
+				return (FAILURE);
+			else if (ft_strchr("NSEW", map[i][j]))
+			{
+				data->player.dir = map[i][j];
+				data->map[i][j] = '0';
+				data->player.pos_x = (double)j + 0.5;
+				data->player.pos_y = (double)i + 0.5;
+			}
+			j++;
+		}
+	}
+	return (SUCCESS);
 }

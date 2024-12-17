@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_validity.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:21:21 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 19:21:47 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/18 03:28:03 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,34 +57,6 @@ int	check_num_players(char **map)
 	return (SUCCESS);
 }
 
-int	check_map_elements(t_data *data)
-{
-	int		i;
-	int		j;
-	char	**map;
-
-	map = data->map;
-	i = -1;
-	while (map[++i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (ft_strchr("01NSEW", map[i][j]) == NULL)
-				return (FAILURE);
-			else if (ft_strchr("NSEW", map[i][j]))
-			{
-				data->player.dir = map[i][j];
-				data->map[i][j] = '0';
-				data->player.pos_x = (double)j + 0.5;
-				data->player.pos_y = (double)i + 0.5;
-			}
-			j++;
-		}
-	}
-	return (SUCCESS);
-}
-
 int	check_textures(t_textures *tex_info)
 {
 	if (!tex_info->north || !tex_info->south || !tex_info->east
@@ -105,18 +77,43 @@ int	check_textures(t_textures *tex_info)
 int	check_map(t_data *data)
 {
 	if (data->map_rows < 3)
+	{
+		free_data(data);
 		return (err_msg("Map must contain at least 3 rows"), FAILURE);
+	}
 	if (check_enclosed_space(data->map, data->map_rows) == FAILURE)
+	{
+		free_data(data);
 		return (err_msg("Map is not enclosed by walls!"), FAILURE);
+	}
 	replace_space_to_1(data->map, data->map_rows);
+	if (check_map_details(data) == FAILURE)
+		return (FAILURE);
+	if (check_textures(&data->tex_info) == FAILURE)
+	{
+		free_data(data);
+		return (FAILURE);
+	}
+	return (SUCCESS);
+}
+
+int	check_map_details(t_data *data)
+{
 	if (check_map_closed(data->map, data->map_rows) == FAILURE)
+	{
+		free_data(data);
 		return (err_msg("Map is not closed by walls!"), FAILURE);
+	}
 	if (check_num_players(data->map) == FAILURE)
+	{
+		free_data(data);
 		return (err_msg("This is a single player game"), FAILURE);
+	}
 	if (check_map_elements(data) == FAILURE)
+	{
+		free_data(data);
 		return (err_msg("Map should only contain 0, 1 and one of NSEW"),
 			FAILURE);
-	if (check_textures(&data->tex_info) == FAILURE)
-		return (FAILURE);
+	}
 	return (SUCCESS);
 }

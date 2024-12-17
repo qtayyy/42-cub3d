@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 02:39:07 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 03:27:35 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,8 @@ void			extract_color_textures(char *line, t_textures *tex_info);
 int				count_map_rows(char **cub_file);
 char			*dup_map(char *line);
 int				check_map(t_data *data);
+int				check_map_details(t_data *data);
+int				check_map_elements(t_data *data);
 int				check_file_open(char *file_path);
 int				check_texture_ext(t_textures *tex_info);
 int				check_rgb(int *rgb);

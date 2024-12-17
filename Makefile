@@ -128,8 +128,8 @@ play: all
 	@ ./$(NAME) maps/sponge.cub
 
 run: all
-	@echo "Enter the number corresponding to the map you want to run:"
-	@/bin/bash -c '\
+	@ echo "Enter the number corresponding to the map you want to run:"
+	@ /bin/bash -c '\
 	PS3="Select a map or Quit: "; \
 	select map in $(MAPS) "Quit"; do \
 		if [ "$$map" = "Quit" ]; then \
@@ -163,6 +163,21 @@ unix2dos: check-dos2unix
 	done
 
 valgrind: all
-	valgrind --leak-check=full ./$(NAME) maps/sponge.cub
+	@ echo $(GREEN)"Going to Valgrind..."$(RESET)
+	@ echo $(GREEN)"Enter Which Map you want to check for memory leaks:"$(RESET)
+	@ /bin/bash -c '\
+	PS3="Select a map or Quit: "; \
+	select map in $(MAPS) "Quit"; do \
+		if [ "$$map" = "Quit" ]; then \
+			echo "Exiting."; \
+			break; \
+		elif [ -n "$$map" ]; then \
+			echo "Running $(NAME) with $$map..."; \
+			valgrind --leak-check=full ./$(NAME) $$map; \
+			break; \
+		else \
+			echo "Invalid selection."; \
+		fi; \
+	done'
 
 .PHONY: all re clean fclean bonus norm play check-dos2unix dos2unix unix2dos
