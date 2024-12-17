@@ -101,7 +101,7 @@ $(MLX):
 	@ echo $(GREEN)"Minilibx compiled"$(RESET)
 
 clean:
-	@ echo $(CYAN)"Cleaning Cube3D objects..."$(RESET)
+	@ echo $(CYAN)"Cleaning Cub3D objects..."$(RESET)
 	@ rm -rf $(OBJ_PATH)
 	@ echo $(CYAN)"Cleaning Libft objects..."$(RESET)
 	@ make -s -C $(LIBFT_PATH) clean
