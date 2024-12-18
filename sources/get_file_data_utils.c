@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:56:44 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 03:07:29 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 14:44:58 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ int	read_cub_file(int fd, t_cubfile *file_info)
 		{
 			free_double_arr((void **)file_info->cub_file);
 			if (close(fd) == -1)
-			{
-				free_double_arr((void **)file_info->cub_file);
-				return (err_msg("Close error"), FAILURE);
-			}
+				return (err_msg("Close error and ft_strdup failure"),
+					FAILURE);
 			return (err_msg("ft_strdup failure"), FAILURE);
 		}
 		line = get_next_line(fd);
