@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 17:02:27 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:53:31 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,13 @@ typedef struct s_data
 	t_ray		ray;
 }	t_data;
 
+typedef struct s_map_info
+{
+	char	**map;
+	int		max_h;
+	int		max_w;
+}	t_map_info;
+
 /* UTILIZATION */
 void			err_msg(char *msg);
 void			free_double_arr(void **double_arr);
@@ -208,6 +215,10 @@ int				flood_fill(char **map, int height);
 void			flood_fill_recursive(char **map, int i, int j, int max_h);
 int				scan_map(char **map, int height);
 int				check_surrounding(char **map, int i, int j, int max_h);
+int				check_valid_position(char **map, int i, int j, int max_h);
+int				process_row(t_map_info *info, int i, int j, int row);
+int				check_cell(t_map_info *info, int row, int col);
+int				is_valid_position(int row, int col, int max_h, int max_w);
 int				is_me(int *i, int *j, int *row, int *col);
 int				is_0_or_player(char c);
 void			replace_space_to_1(char **map, int rows);

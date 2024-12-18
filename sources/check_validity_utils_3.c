@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:40:56 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/18 17:14:42 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:55:01 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,24 @@ int	scan_map(char **map, int height)
 
 int	check_surrounding(char **map, int i, int j, int max_h)
 {
-	int	max_w;
-	int	row;
-	int	col;
+	int			row;
+	int			result;
+	t_map_info	info;
 
-	max_w = ft_strlen(map[i]);
+	info.map = map;
+	info.max_h = max_h;
 	row = i - 1;
-	while (row <= i + 1)
+	while (row <= i + 1 && row < max_h)
 	{
-		col = j - 1;
-		while (col <= j + 1)
+		if (row < 0 || !map[row])
 		{
-			if (is_me(&i, &j, &row, &col) == TRUE)
-				continue ;
-			if (row >= 0 && row < max_h && col >= 0 && col < max_w)
-			{
-				if (is_0_or_player(map[row][col]) == TRUE)
-					return (FAILURE);
-			}
-			col++;
+			row++;
+			continue ;
 		}
+		info.max_w = (int)ft_strlen(map[row]);
+		result = process_row(&info, i, j, row);
+		if (result == FAILURE)
+			return (FAILURE);
 		row++;
 	}
 	return (SUCCESS);
