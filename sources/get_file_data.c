@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:54:52 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 17:12:22 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/18 21:30:55 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,16 @@ int	get_textures(t_data *data)
 	return (SUCCESS);
 }
 
-/**
- * Probably can check if nothing comes after the map here
- */
+static void	calloc_map(t_data *data)
+{
+	data->map = ft_calloc(data->map_rows + 1, sizeof(char *));
+	if (data->map == NULL)
+	{
+		err_msg("Malloc failure");
+		exit_cub3d(data, 1);
+	}
+}
+
 int	get_map(t_data *data)
 {
 	int		i;
@@ -60,9 +67,7 @@ int	get_map(t_data *data)
 	data->map_rows = count_map_rows(data->file_info.cub_file);
 	temp_cubfile = data->file_info.cub_file;
 	line = *temp_cubfile;
-	data->map = ft_calloc(data->map_rows + 1, sizeof(char *));
-	if (data->map == NULL)
-		return (err_msg("Malloc failure"), FAILURE);
+	calloc_map(data);
 	while (line)
 	{
 		i = 0;
@@ -71,12 +76,9 @@ int	get_map(t_data *data)
 		if (ft_isdigit(line[i]))
 		{
 			data->map[j] = dup_map(line);
-			if (data->map[j] == NULL)
+			if (data->map[j++] == NULL)
 				return (err_msg("Malloc failure"), FAILURE);
-			j++;
 		}
-		if (line[i] == '\0')
-			break ;
 		temp_cubfile++;
 		line = *temp_cubfile;
 	}
