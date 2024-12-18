@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:47:16 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/16 19:31:13 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/18 11:29:14 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,20 @@ void	input_handler(t_data *data)
 int	mouse_motion_handler(int x, int y, t_data *data)
 {
 	static int	old_x;
-	static int	old_y;
+	// static int	old_y;
 	int			diff_x;
 
 	(void)y;
 	diff_x = x - old_x;
 	if (diff_x > 0)
-		data->player.has_moved += rotate_anticlockwise(data);
-	else if (diff_x < 0)
 		data->player.has_moved += rotate_clockwise(data);
-	mlx_mouse_get_pos(data->mlx, data->win, &old_x, &old_y);
+	else if (diff_x < 0)
+		data->player.has_moved += rotate_anticlockwise(data);
 	if (old_x > WIN_WIDTH - EDGE_WIND)
 		mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	if (old_x < EDGE_WIND)
 		mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	old_x = x;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 03:27:35 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 11:30:01 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # endif
 
 # define MOVE_STEP 0.05 // 0.015
-# define ROTATE_STEP 0.075
+# define ROTATE_STEP 0.015
 
 enum e_texture_index
 {
