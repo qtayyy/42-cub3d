@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:47:16 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/18 11:29:14 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 13:35:40 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	input_handler(t_data *data)
 int	mouse_motion_handler(int x, int y, t_data *data)
 {
 	static int	old_x;
-	// static int	old_y;
 	int			diff_x;
 
 	(void)y;
