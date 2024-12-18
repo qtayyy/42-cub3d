@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:14:51 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 19:51:59 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/18 22:47:38 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,31 @@ int	count_map_rows(char **cub_file)
 	return (map_rows);
 }
 
-static int	count_num_delims(char *line, int delim)
+static int	count_num_colors(char *line)
 {
-	int	count;
+	int		i;
+	int		count;
+	char	*token;
+	char	*copy;
 
+	copy = ft_strdup(line);
 	count = 0;
-	while (*line)
+	token = ft_strtok(copy, ", ");
+	while (token != NULL)
 	{
-		if (*line == delim && *(line + 1))
-			count++;
-		line++;
+		i = 0;
+		while (token[i] != '\0' && token[i] != '\n')
+		{
+			if (!ft_isdigit(token[i++]))
+			{
+				free(copy);
+				return (-1);
+			}
+		}
+		count++;
+		token = ft_strtok(NULL, ", ");
 	}
+	free(copy);
 	return (count);
 }
 
@@ -76,7 +90,7 @@ static void	dup_color_texture(char *line, int **tex_color)
 
 	while (*line == '\t' || *line == ' ')
 		line++;
-	if (count_num_delims(line, ',') != 2)
+	if (count_num_colors(line) != 3)
 	{
 		err_msg("Invalid RGB");
 		return ;
@@ -88,19 +102,19 @@ static void	dup_color_texture(char *line, int **tex_color)
 		return ;
 	}
 	temp_color = *tex_color;
-	token = ft_strtok(line, ",");
+	token = ft_strtok(line, ", ");
 	while (token && *token != '\n')
 	{
 		*temp_color = ft_atoi(token);
-		token = ft_strtok(NULL, ",");
+		token = ft_strtok(NULL, ", ");
 		temp_color++;
 	}
 }
 
 void	extract_color_textures(char *line, t_textures *tex_info)
 {
-	if (ft_strncmp(line, "F", 1) == 0)
+	if (ft_strncmp(line, "F", 1) == 0 && !tex_info->floor)
 		dup_color_texture(line + 1, &tex_info->floor);
-	else if (ft_strncmp(line, "C", 1) == 0)
+	else if (ft_strncmp(line, "C", 1) == 0 && !tex_info->ceiling)
 		dup_color_texture(line + 1, &tex_info->ceiling);
 }

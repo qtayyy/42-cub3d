@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:56:44 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 14:44:58 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/18 18:35:25 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ static void	dup_dir_texture(char *line,	char **tex_dir)
 
 void	extract_dir_textures(char *line, t_textures *tex_info)
 {
-	if (ft_strncmp(line, "NO", 2) == 0)
+	if (ft_strncmp(line, "NO", 2) == 0 && !tex_info->north)
 		dup_dir_texture(line + 2, &tex_info->north);
-	else if (ft_strncmp(line, "SO", 2) == 0)
+	else if (ft_strncmp(line, "SO", 2) == 0 && !tex_info->south)
 		dup_dir_texture(line + 2, &tex_info->south);
-	else if (ft_strncmp(line, "EA", 2) == 0)
+	else if (ft_strncmp(line, "EA", 2) == 0 && !tex_info->east)
 		dup_dir_texture(line + 2, &tex_info->east);
-	else if (ft_strncmp(line, "WE", 2) == 0)
+	else if (ft_strncmp(line, "WE", 2) == 0 && !tex_info->west)
 		dup_dir_texture(line + 2, &tex_info->west);
 }
