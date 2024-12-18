@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_validity_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:40:36 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 03:18:58 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 16:30:16 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_file_open(char *file_path)
 int	check_rgb(int *rgb)
 {
 	if (rgb == NULL)
-		return (FAILURE);
+		return (err_msg("Missing RGB"), FAILURE);
 	while (*rgb)
 	{
 		if (*rgb < 0 || *rgb > 255)
