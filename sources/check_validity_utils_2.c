@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_validity_utils_2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:28:25 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/18 16:26:11 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:18:20 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	flood_fill(char **map, int height)
 		}
 		i++;
 	}
-	print_map(map);
 	if (scan_map(map, height) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
