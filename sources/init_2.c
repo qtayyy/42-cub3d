@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:30:19 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 19:28:14 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/18 14:40:59 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ static int	*xpm_to_img(t_data *data, char *path)
 
 	init_texture_img(data, &tmp, path);
 	buffer = ft_calloc((TEXTURE_SIZE) * (TEXTURE_SIZE), sizeof(int));
+	if (buffer == NULL)
+	{
+		err_msg("malloc error");
+		exit_cub3d(data, 1);	
+	}
 	ft_memcpy(buffer, tmp.addr, (TEXTURE_SIZE) * (TEXTURE_SIZE) * sizeof(int));
 	mlx_destroy_image(data->mlx, tmp.img);
 	return (buffer);
@@ -82,7 +87,10 @@ void	load_texture_img(t_data *data)
 {
 	data->textures = ft_calloc(5, sizeof(int *));
 	if (data->textures == NULL)
-		return ;
+	{
+		err_msg("malloc error");
+		exit_cub3d(data, 1);
+	}
 	data->textures[NORTH] = xpm_to_img(data, data->tex_info.north);
 	data->textures[SOUTH] = xpm_to_img(data, data->tex_info.south);
 	data->textures[EAST] = xpm_to_img(data, data->tex_info.east);
