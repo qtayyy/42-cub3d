@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_validity.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:21:21 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 11:09:20 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 15:45:20 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,15 @@ int	check_map_closed(char **map, int rows)
 
 	i = 0;
 	prev = ft_strlen(map[0]);
-	while (++i < rows - 1)
+	if (ft_strspn(map[0], "1") != prev
+		|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows - 1]))
+		return (FAILURE);
+	while (++i < rows)
 	{
 		cur = ft_strlen(map[i]);
-		if (cur > prev
+		if (map[i][0] != '1' || map[i][cur - 1] != '1')
+			return (FAILURE);
+		if (cur >= prev
 			&& ft_strspn(map[i] + prev - 1, "1") != cur - prev + 1)
 			return (FAILURE);
 		if (cur < prev
