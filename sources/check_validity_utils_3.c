@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:40:56 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/18 03:27:47 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 16:57:51 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,27 @@ int	scan_map(char **map, int height)
 int	check_surrounding(char **map, int i, int j, int max_h)
 {
 	int	max_w;
+	int	row;
+	int	col;
 
 	max_w = ft_strlen(map[i]);
-	if (i == 0 || i >= (max_h - 1) || j == 0 || j >= (max_w - 1))
-		return (SUCCESS);
-	if (map[i][j + 1] != '\0' && is_0_or_player(map[i][j + 1]) == TRUE)
-		return (FAILURE);
-	if (map[i][j - 1] != '\0' && is_0_or_player(map[i][j - 1]) == TRUE)
-		return (FAILURE);
-	if (map[i + 1][j] != '\0' && is_0_or_player(map[i + 1][j]) == TRUE)
-		return (FAILURE);
-	if (map[i - 1][j] != '\0' && is_0_or_player(map[i - 1][j]) == TRUE)
-		return (FAILURE);
+	row = i - 1;
+	while (row <= i + 1)
+	{
+		col = j - 1;
+		while (col <= j + 1)
+		{
+			if (is_me(&i, &j, &row, &col) == TRUE)
+				continue;
+			if (row >= 0 && row < max_h && col >= 0 && col < max_w)
+			{
+				if (is_0_or_player(map[row][col]) == TRUE)
+					return (FAILURE);
+			}
+			col++;
+		}
+		row++;
+	}
 	return (SUCCESS);
 }
 

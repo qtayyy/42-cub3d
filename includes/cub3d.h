@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 13:58:30 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:02:27 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,12 +200,15 @@ int				check_file_open(char *file_path);
 int				check_texture_ext(t_textures *tex_info);
 int				check_rgb(int *rgb);
 unsigned long	convert_rgb_hex(int *rgb);
+
+/* FLOOD FILL CHECK SPACES */
 int				check_enclosed_space(char **map, int rows);
 char			**duplicate_map(char **map, int rows);
 int				flood_fill(char **map, int height);
 void			flood_fill_recursive(char **map, int i, int j, int max_h);
 int				scan_map(char **map, int height);
 int				check_surrounding(char **map, int i, int j, int max_h);
+int				is_me(int *i, int *j, int *row, int *col);
 int				is_0_or_player(char c);
 void			replace_space_to_1(char **map, int rows);
 

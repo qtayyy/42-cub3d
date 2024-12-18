@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:28:25 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/16 18:53:59 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 16:26:11 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	flood_fill(char **map, int height)
 		}
 		i++;
 	}
+	print_map(map);
 	if (scan_map(map, height) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);

@@ -16,7 +16,8 @@ NAME	= cub3D
 CC		= cc
 CFLAGS	= -Werror -Wextra -Wall #-g3 -fsanitize=address #-Werror -Wextra -Wall 
 #---------Maps----------#
-MAPS := $(shell ls maps/*.cub)
+G_MAPS := $(shell ls maps/good/*.cub)
+B_MAPS := $(shell ls maps/bad/*.cub)
 
 #--------Minilibx--------#
 MLX_PATH	= minilibx-linux/
@@ -37,6 +38,7 @@ SRC		= 	main.c \
 			check_validity_utils.c \
 			check_validity_utils_2.c \
 			check_validity_utils_3.c \
+			check_validity_utils_4.c \
 			get_file_data.c \
 			get_file_data_utils.c \
 			get_file_data_utils_2.c \
@@ -127,10 +129,26 @@ play: all
 	@ ./$(NAME) maps/sponge.cub
 
 run: all
-	@ echo "Enter the number corresponding to the map you want to run:"
+	@ echo "Choose the type of map you want to run:";
 	@ /bin/bash -c '\
+	PS3="Select Good Maps, Bad Maps, or Quit: "; \
+	select type in "Good Maps" "Bad Maps" "Quit"; do \
+		case $$type in \
+			"Good Maps") \
+				maps="$(G_MAPS)"; \
+				break;; \
+			"Bad Maps") \
+				maps="$(B_MAPS)"; \
+				break;; \
+			"Quit") \
+				echo "Exiting."; \
+				exit 0;; \
+			*) \
+				echo "Invalid selection. Please choose again.";; \
+		esac; \
+	done; \
 	PS3="Select a map or Quit: "; \
-	select map in $(MAPS) "Quit"; do \
+	select map in $$maps "Quit"; do \
 		if [ "$$map" = "Quit" ]; then \
 			echo "Exiting."; \
 			break; \
@@ -160,23 +178,5 @@ unix2dos: check-dos2unix
 	@ for folder in $(DOS2UNIX_FOLDERS); do \
 		find $$folder -type f -exec unix2dos {} \;; \
 	done
-
-valgrind: all
-	@ echo $(GREEN)"Going to Valgrind..."$(RESET)
-	@ echo $(GREEN)"Enter Which Map you want to check for memory leaks:"$(RESET)
-	@ /bin/bash -c '\
-	PS3="Select a map or Quit: "; \
-	select map in $(MAPS) "Quit"; do \
-		if [ "$$map" = "Quit" ]; then \
-			echo "Exiting."; \
-			break; \
-		elif [ -n "$$map" ]; then \
-			echo "Running $(NAME) with $$map..."; \
-			valgrind --leak-check=full ./$(NAME) $$map; \
-			break; \
-		else \
-			echo "Invalid selection."; \
-		fi; \
-	done'
 
 .PHONY: all re clean fclean bonus norm play check-dos2unix dos2unix unix2dos
