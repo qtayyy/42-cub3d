@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:54:52 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 03:17:08 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 14:45:33 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	get_file(char *file_path, t_data *data)
 	if (get_map(data) == FAILURE)
 	{
 		free_data(data);
-		return (err_msg("Map Eeror"), FAILURE);
+		return (err_msg("Map Error"), FAILURE);
 	}
 	if (check_post_map(data) == FAILURE)
 	{
