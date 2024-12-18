@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:30:19 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 14:40:59 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/18 17:14:52 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	*xpm_to_img(t_data *data, char *path)
 	if (buffer == NULL)
 	{
 		err_msg("malloc error");
-		exit_cub3d(data, 1);	
+		exit_cub3d(data, 1);
 	}
 	ft_memcpy(buffer, tmp.addr, (TEXTURE_SIZE) * (TEXTURE_SIZE) * sizeof(int));
 	mlx_destroy_image(data->mlx, tmp.img);

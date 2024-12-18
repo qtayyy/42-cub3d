@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:40:56 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/18 16:57:51 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:14:42 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_surrounding(char **map, int i, int j, int max_h)
 		while (col <= j + 1)
 		{
 			if (is_me(&i, &j, &row, &col) == TRUE)
-				continue;
+				continue ;
 			if (row >= 0 && row < max_h && col >= 0 && col < max_w)
 			{
 				if (is_0_or_player(map[row][col]) == TRUE)
