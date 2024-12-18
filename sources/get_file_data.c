@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 21:54:52 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 14:45:33 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/18 17:12:22 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,12 @@ int	get_map(t_data *data)
 		while (line[i] == '\t' || line[i] == ' ')
 			i++;
 		if (ft_isdigit(line[i]))
-			data->map[j++] = dup_map(line);
+		{
+			data->map[j] = dup_map(line);
+			if (data->map[j] == NULL)
+				return (err_msg("Malloc failure"), FAILURE);
+			j++;
+		}
 		if (line[i] == '\0')
 			break ;
 		temp_cubfile++;
