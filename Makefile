@@ -161,6 +161,40 @@ run: all
 		fi; \
 	done'
 
+valgrind: all
+	@ echo "Running with valgrind...";
+	@ echo "Choose the type of map you want to run:";
+	@ /bin/bash -c '\
+	PS3="Select Good Maps, Bad Maps, or Quit: "; \
+	select type in "Good Maps" "Bad Maps" "Quit"; do \
+		case $$type in \
+			"Good Maps") \
+				maps="$(G_MAPS)"; \
+				break;; \
+			"Bad Maps") \
+				maps="$(B_MAPS)"; \
+				break;; \
+			"Quit") \
+				echo "Exiting."; \
+				exit 0;; \
+			*) \
+				echo "Invalid selection. Please choose again.";; \
+		esac; \
+	done; \
+	PS3="Select a map or Quit: "; \
+	select map in $$maps "Quit"; do \
+		if [ "$$map" = "Quit" ]; then \
+			echo "Exiting."; \
+			break; \
+		elif [ -n "$$map" ]; then \
+			echo "Running valgrind on $(NAME) with $$map..."; \
+			valgrind --leak-check=full ./$(NAME) $$map; \
+			break; \
+		else \
+			echo "Invalid selection."; \
+		fi; \
+	done'
+
 check-dos2unix:
 	@ command -v dos2unix >/dev/null 2>&1 && { \
 		echo $(MAGENTA)"Dos2unix is found"$(RESET); \
