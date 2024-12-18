@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 11:30:01 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/18 13:58:30 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,11 +212,8 @@ void			replace_space_to_1(char **map, int rows);
 /* POST-MAP CONTENT CHECK */
 void			print_map(char **map);
 int				check_post_map(t_data *data);
-int				skip_to_map(char **temp_cubfile);
-int				line_has_only_digit_space(char *line);
 int				ft_is_whitespace_only(char *line);
 int				skip_empty_spaces(char *line);
-int				check_line_has_only_spaces(char *line);
 int				ft_isspace(char c);
 int				check_line_has_content(char *line);
 int				check_spaces_line(char *line);
