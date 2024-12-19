@@ -39,6 +39,7 @@ SRC		= 	main.c \
 			check_validity_utils_2.c \
 			check_validity_utils_3.c \
 			check_validity_utils_4.c \
+			check_validity_utils_5.c \
 			get_file_data.c \
 			get_file_data_utils.c \
 			get_file_data_utils_2.c \

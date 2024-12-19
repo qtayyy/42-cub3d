@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 17:53:31 by nchok            ###   ########.fr       */
+/*   Updated: 2024/12/19 10:18:05 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,9 @@ typedef struct s_map_info
 	char	**map;
 	int		max_h;
 	int		max_w;
+	int		found_1;
 }	t_map_info;
+
 
 /* UTILIZATION */
 void			err_msg(char *msg);
@@ -222,6 +224,12 @@ int				is_valid_position(int row, int col, int max_h, int max_w);
 int				is_me(int *i, int *j, int *row, int *col);
 int				is_0_or_player(char c);
 void			replace_space_to_1(char **map, int rows);
+
+/* CHECK INNER SPACE */
+int				check_map_inner_space(t_data *data, char **map, int max_h);
+int				check_closed_by_1(char **map, int i, int j, int max_h);
+int				check_up_down(t_map_info *info, int h, int j);
+int				check_left_right(t_map_info *info, int h, int j);
 
 /* POST-MAP CONTENT CHECK */
 void			print_map(char **map);

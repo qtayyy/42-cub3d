@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_validity.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:21:21 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 15:45:20 by qtay             ###   ########.fr       */
+/*   Updated: 2024/12/19 10:24:39 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ int	check_map(t_data *data)
 	{
 		free_data(data);
 		return (err_msg("Map is not enclosed by walls!"), FAILURE);
+	}
+	if (check_map_inner_space(data, data->map, data->map_rows) == FAILURE)
+	{
+		free_data(data);
+		return (err_msg("Map contains inner space"), FAILURE);
 	}
 	replace_space_to_1(data->map, data->map_rows);
 	if (check_map_details(data) == FAILURE)
