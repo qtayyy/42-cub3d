@@ -6,7 +6,7 @@
 /*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 17:53:31 by nchok            ###   ########.fr       */
+/*   Updated: 2025/01/23 18:56:34 by nchok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define TRUE 0
 # define FALSE 1
 
-# define WIN_HEIGHT 1080
-# define WIN_WIDTH 1920
+# define WIN_HEIGHT 960
+# define WIN_WIDTH 1280
 # define TEXTURE_SIZE 64
 # define EDGE_WIND 25
 
@@ -83,6 +83,8 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_cubfile
@@ -235,6 +237,7 @@ int				get_index_to_end_map(t_data *data);
 
 /* RAYCASTING */
 void			render_raycast(t_data *data);
+unsigned int	get_pixel_color(t_img *texture_img, int x, int y);
 void			raycasting(t_data *data, t_player *player);
 void			init_raycasting(int x, t_ray *ray, t_player *player);
 void			init_dda_algo(t_ray *ray, t_player *player);
