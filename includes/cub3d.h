@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:34:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/18 17:53:31 by nchok            ###   ########.fr       */
+/*   Updated: 2025/02/02 19:01:38 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 
 # define WIN_HEIGHT 1080
 # define WIN_WIDTH 1920
-# define TEXTURE_SIZE 64
 # define EDGE_WIND 25
 
 /* KEYCODE */

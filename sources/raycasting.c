@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:52:50 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 19:29:38 by qtay             ###   ########.fr       */
+/*   Updated: 2025/02/02 19:01:20 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,20 @@ void	update_screen_pixel(t_data *data, t_ray *ray,
 	int		color;
 
 	tex_info->tex_index = get_texture_index(ray);
-	tex_info->tex_x = (int)(ray->wall_x * (double)TEXTURE_SIZE);
+	tex_info->tex_x = (int)(ray->wall_x * (double)data->tex_info.size);
 	if ((ray->side == VERTICAL && ray->dir_x > 0)
 		|| (ray->side == HORIZONTAL && ray->dir_y < 0))
-		tex_info->tex_x = TEXTURE_SIZE - tex_info->tex_x - 1;
-	tex_info->increment = (double)TEXTURE_SIZE / ray->line_height;
+		tex_info->tex_x = data->tex_info.size - tex_info->tex_x - 1;
+	tex_info->increment = (double)data->tex_info.size / ray->line_height;
 	tex_info->tex_pos = (ray->draw_start + (ray->line_height - WIN_HEIGHT) / 2)
 		* tex_info->increment;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		tex_info->tex_y = (int)tex_info->tex_pos & (TEXTURE_SIZE - 1);
+		tex_info->tex_y = (int)tex_info->tex_pos;
 		tex_info->tex_pos += tex_info->increment;
 		color = data->textures[tex_info->tex_index]
-		[TEXTURE_SIZE * tex_info->tex_y + tex_info->tex_x];
+		[data->tex_info.size * tex_info->tex_y + tex_info->tex_x];
 		if (color > 0)
 			data->screen_pixels[y][x] = color;
 		y++;

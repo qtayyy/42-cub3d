@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nchok <nchok@student.42kl..edu.my>         +#+  +:+       +#+        */
+/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 23:19:34 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 14:04:42 by nchok            ###   ########.fr       */
+/*   Updated: 2025/02/02 18:58:12 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	init_player(t_player *player)
 
 void	init_textures_info(t_textures *tex_info)
 {
-	tex_info->size = TEXTURE_SIZE;
+	tex_info->size = 0;
 	tex_info->north = NULL;
 	tex_info->south = NULL;
 	tex_info->east = NULL;
