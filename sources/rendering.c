@@ -6,7 +6,7 @@
 /*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:00 by qtay              #+#    #+#             */
-/*   Updated: 2024/12/16 19:30:30 by qtay             ###   ########.fr       */
+/*   Updated: 2025/02/02 19:04:06 by qtay             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	init_screen_pixels(t_data *data)
 void	put_pixel(t_img	*image, int x, int y, int color)
 {
 	int	pixel;
-
-	pixel = (y * image->line_length + (x * (image->bits_per_pixel / 8))) / 4;
+	pixel = y * (image->line_length / sizeof(int)) + x;
+	// pixel = (y * image->line_length + (x * (image->bits_per_pixel / 8))) / 4;
 	image->addr[pixel] = color;
 }
 
